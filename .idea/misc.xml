@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2165" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/btn_rounded_black.xml" value="0.135" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/ic_i_gudang.xml" value="0.1595" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/layout_bg.xml" value="0.1595" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/logo_background.xml" value="0.141" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/rounded_danger.xml" value="0.176" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/rounded_edittext.xml" value="0.2165" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/rounded_info.xml" value="0.1645" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/rounded_input.xml" value="0.1595" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/rounded_success.xml" value="0.176" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/shape_circle.xml" value="0.204" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/drawable/shape_login.xml" value="0.1665" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_finish_goods.xml" value="0.15250379362670713" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_gudang.xml" value="0.15250379362670713" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_login_page.xml" value="0.25" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_main.xml" value="0.28693790149892934" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_menu_raw.xml" value="0.2" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_pengolahan.xml" value="0.25" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/activity_raw.xml" value="0.18" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/component_dashboar_sorting_dialog.xml" value="0.15250379362670713" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/component_dashboard_sorting_dialog.xml" value="0.25" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/component_dialog.xml" value="0.22" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/component_info.xml" value="0.151268115942029" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/component_menu_sorting.xml" value="0.25" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/dashboard_pengolahan_basah.xml" value="0.25" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/dashboard_sorting.xml" value="0.2" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/input_data_sorting.xml" value="0.2647412755716005" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/input_raw_data.xml" value="0.25" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/list_item.xml" value="0.15174506828528073" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/list_raw.xml" value="0.15174506828528073" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/list_raw_data.xml" value="0.22" />
+        <entry key="..\:/2. Kuliah/SEMESTER 7/TA/SmartFarming_PascaPanen/app/src/main/res/layout/login_page.xml" value="0.15250379362670713" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
