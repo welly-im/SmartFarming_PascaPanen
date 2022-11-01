@@ -2,8 +2,12 @@ package com.example.smartfarming_pascapanen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smartfarming_pascapanen.Pengolahan.Pengolahan;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
 import com.example.smartfarming_pascapanen.RawData.MenuRaw;
 import com.example.smartfarming_pascapanen.RawData.Raw;
 
@@ -28,7 +33,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     TextView textNama;
-    ImageButton btnRaw, btnFinish, btnInfo, btnPengolahan;
+    ImageButton btnRaw, btnInfo, btnPengolahan;
+    Dialog DialogPilihSorting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         textNama = findViewById(R.id.textNama);
         btnRaw = findViewById(R.id.raw);
-        btnFinish = findViewById(R.id.finish);
         btnInfo = findViewById(R.id.informasi);
         btnPengolahan = findViewById(R.id.pengolahan);
+        DialogPilihSorting = new Dialog(this);
 
         Intent i = getIntent();
         String id_pengguna = i.getStringExtra("id_pengguna");
@@ -52,18 +58,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btnPengolahan.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Pengolahan.class);
-            intent.putExtra("id_pengguna", id_pengguna);
-            intent.putExtra("nama_pengguna", nama_pengguna);
-            startActivity(intent);
-        });
-
-        btnFinish.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FinishGoods.class);
-            intent.putExtra("id_pengguna", id_pengguna);
-            intent.putExtra("nama_pengguna", nama_pengguna);
-            startActivity(intent);
+        btnPengolahan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopUpPilihSorting(v, id_pengguna, nama_pengguna);
+            }
         });
 
         if(id_pengguna == null){
@@ -104,5 +103,27 @@ public class MainActivity extends AppCompatActivity {
         };
         queue.add(stringRequest);
     }
+
+    private void PopUpPilihSorting(View v, String id_pengguna, String nama_pengguna){
+        Button KopiBagus, KopiJelek;
+        DialogPilihSorting.setContentView(R.layout.component_pilih_sorting);
+        KopiBagus = DialogPilihSorting.findViewById(R.id.kopi_bagus);
+        KopiJelek = DialogPilihSorting.findViewById(R.id.kopi_jelek);
+
+        KopiBagus.setOnClickListener(v1 -> {
+            Intent intent = new Intent(MainActivity.this, PengolahanBagus.class);
+            intent.putExtra("id_pengguna", id_pengguna);
+            intent.putExtra("nama_pengguna", nama_pengguna);
+            startActivity(intent);
+            DialogPilihSorting.dismiss();
+        });
+        //make full width
+        DialogPilihSorting.getWindow().setLayout(1000, 1000);
+        DialogPilihSorting.getWindow().setGravity(Gravity.BOTTOM);
+        DialogPilihSorting.getWindow().getAttributes().windowAnimations = androidx.appcompat.R.style.Animation_AppCompat_Dialog;
+        DialogPilihSorting.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        DialogPilihSorting.show();
+    }
+
 
 }

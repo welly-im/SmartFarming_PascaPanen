@@ -6,7 +6,6 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.smartfarming_pascapanen.Pengolahan.Fermentasi.DashboardPengolahanBasah;
 import com.example.smartfarming_pascapanen.R;
 
 public class Pengolahan extends AppCompatActivity {
@@ -24,13 +23,6 @@ public class Pengolahan extends AppCompatActivity {
 
         Fermentasi = findViewById(R.id.toFermentasi);
         Penjemuran = findViewById(R.id.toPenjemuran);
-
-        Fermentasi.setOnClickListener(v -> {
-            Intent intent = new Intent(Pengolahan.this, DashboardPengolahanBasah.class);
-            intent.putExtra("id_pengguna", id_pengguna);
-            intent.putExtra("nama_pengguna", nama_pengguna);
-            startActivity(intent);
-        });
 
     }
 }
