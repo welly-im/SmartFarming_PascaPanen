@@ -71,7 +71,16 @@ public class InputDataSorting extends AppCompatActivity {
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
 
-
+        btnHapusData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtIDSortingBagus.setText("SBA"+IDdate);
+                edtIDSortingJelek.setText("SJE"+IDdate);
+                edtTanggalSorting.setText(date);
+                edtBeratSortingBagus.setText("");
+                edtBeratSortingJelek.setText("");
+            }
+        });
 
         btnTambahData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +98,6 @@ public class InputDataSorting extends AppCompatActivity {
                 } else {
                     String pesan = "Berat Sorting Bagus dan Jelek Tidak Sesuai Dengan Berat Panen!";
                     AlertPopup(v, pesan);
-
                 }
             }
         });

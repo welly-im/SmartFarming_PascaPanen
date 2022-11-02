@@ -14,7 +14,6 @@ import com.example.smartfarming_pascapanen.RawData.Sorting.DashboardSorting;
 public class MenuRaw extends AppCompatActivity {
 
     Button toRaw, toSorting;
-    Dialog menuDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +23,8 @@ public class MenuRaw extends AppCompatActivity {
         String id_pengguna = i.getStringExtra("id_pengguna");
         String nama_pengguna = i.getStringExtra("nama_pengguna");
 
-
         toRaw = findViewById(R.id.toGudangPanen);
         toSorting = findViewById(R.id.toSorting);
-        menuDialog = new Dialog(this);
 
         toRaw.setOnClickListener(v -> {
             Intent intent = new Intent(MenuRaw.this, Raw.class);

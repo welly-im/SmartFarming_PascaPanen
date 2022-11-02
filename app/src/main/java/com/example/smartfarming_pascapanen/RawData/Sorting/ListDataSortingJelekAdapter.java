@@ -23,7 +23,6 @@ public class ListDataSortingJelekAdapter extends RecyclerView.Adapter<ListDataSo
         this.inflater2 = LayoutInflater.from(context);
     }
 
-
     @NonNull
     @Override
     public HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

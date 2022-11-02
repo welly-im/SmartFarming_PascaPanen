@@ -139,11 +139,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/textSedangDiproses"
                     app:layout_constraintVertical_bias="0.0">
 
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:id="@+id/recycler_view_sedang_fermentasi"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_sedang_fermentasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -196,11 +196,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/textSedangDiproses"
                     app:layout_constraintVertical_bias="0.0">
 
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:id="@+id/recycler_view_sedang_penjemuran"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_sedang_penjemuran"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
