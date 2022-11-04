@@ -18,9 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilih ID Sorting"
+                android:text="Pilih ID"
                 android:textSize="26dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -42,7 +43,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text="Klik Disini Untuk Pilih \nID Sorting"
+                    android:text="Klik Disini Untuk Pilih ID"
                     android:textColor="@color/white"
                     android:textColorLink="@color/white"
                     android:textColorHighlight="@color/white"
@@ -55,12 +56,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/keteranganPilihId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:layout_marginTop="5dp"
                 android:textSize="12sp"
-                android:text="Silahkan pilih ID Sorting yang ingin diproses"/>
+                android:text="Silahkan pilih ID yang ingin diproses"/>
             <LinearLayout
                 android:layoutDirection="rtl"
                 android:layout_marginTop="25dp"

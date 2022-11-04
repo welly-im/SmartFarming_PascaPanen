@@ -1,6 +1,9 @@
 package com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeBasah;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -22,11 +25,14 @@ import com.example.smartfarming_pascapanen.R;
 import com.example.smartfarming_pascapanen.RawData.Sorting.DashboardSorting;
 import com.example.smartfarming_pascapanen.RawData.Sorting.InputDataSorting;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -35,6 +41,12 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
     EditText IdFermentasi, tglAwalProses, tglAkhirProses;
     Button btnTambahData, btnHapusData;
     Dialog dialogPopUp, infoPopUp;
+    RecyclerView recyclerViewDataBulanPanas;
+    LinearLayoutManager linearLayoutManager;
+    ListMetodeBasahDataBulanAdapter listMetodeBasahDataBulanAdapter;
+    List<DataModelMetodeBasahDataBulan> listDataBulan;
+    DataModelMetodeBasahDataBulan dataModelMetodeBasahDataBulan;
+    CardView lihatDetailCuaca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +68,8 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         tglAkhirProses = findViewById(R.id.tanggal_akhir_fermentasi);
         btnTambahData = findViewById(R.id.tambah_proses);
         btnHapusData = findViewById(R.id.hapus_data);
+        lihatDetailCuaca = findViewById(R.id.lihat_detail_cuaca);
+        recyclerViewDataBulanPanas = findViewById(R.id.bulan_panas);
 
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
@@ -93,6 +107,8 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
                 }
             }
         });
+
+        GetDataBulanPanas();
     }
 
     private void InputDataFermentasi(String id_fermentasi, String id_sorting, String id_panen_sorting, String id_pengguna_sorting, String berat_sorting, String tanggal_mulai_fermentasi, String tanggal_akhir_fermentasi, String nama_pengguna_sorting) {
@@ -110,7 +126,7 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = getString(R.string.localhost) + "=inputdatafermentasibaru";
+                String url = getString(R.string.localhost) + "=inputdatafermentasibarusortingbagus";
                 RequestQueue queue = Volley.newRequestQueue(MetodeBasahSortingBagusTambahData.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
@@ -185,5 +201,40 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         });
         infoPopUp.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         infoPopUp.show();
+    }
+
+    private void GetDataBulanPanas() {
+        String url = getString(R.string.localhost) + "=getbulanpanas";
+        RequestQueue queue = Volley.newRequestQueue(MetodeBasahSortingBagusTambahData.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listDataBulan = new ArrayList<>();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        dataModelMetodeBasahDataBulan = new DataModelMetodeBasahDataBulan();
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        dataModelMetodeBasahDataBulan.setId_bulan(object.getString("id_bulan"));
+                        dataModelMetodeBasahDataBulan.setNama_bulan(object.getString("nama_bulan"));
+                        listDataBulan.add(dataModelMetodeBasahDataBulan);
+                    }
+                    linearLayoutManager = new LinearLayoutManager(MetodeBasahSortingBagusTambahData.this);
+                    recyclerViewDataBulanPanas.setLayoutManager(linearLayoutManager);
+                    listMetodeBasahDataBulanAdapter = new ListMetodeBasahDataBulanAdapter(MetodeBasahSortingBagusTambahData.this, listDataBulan);
+                    recyclerViewDataBulanPanas.setAdapter(listMetodeBasahDataBulanAdapter);
+                    listMetodeBasahDataBulanAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    Toast.makeText(MetodeBasahSortingBagusTambahData.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MetodeBasahSortingBagusTambahData.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(stringRequest);
     }
 }

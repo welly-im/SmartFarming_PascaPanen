@@ -17,6 +17,12 @@ public class ListSortingBagusSedangFermentasiAdapter extends RecyclerView.Adapte
     List<DataModelSortingBagusSedangFermentasi> listDataSedangFermentasi;
     LayoutInflater inflater;
 
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     public ListSortingBagusSedangFermentasiAdapter(Context context, List<DataModelSortingBagusSedangFermentasi> listDataSedangFermentasi) {
         this.listDataSedangFermentasi = listDataSedangFermentasi;
         this.inflater = LayoutInflater.from(context);
@@ -35,6 +41,14 @@ public class ListSortingBagusSedangFermentasiAdapter extends RecyclerView.Adapte
         holder.tanggal_mulai.setText(listDataSedangFermentasi.get(position).getTanggal_mulai());
         holder.tanggal_akhir.setText(listDataSedangFermentasi.get(position).getTanggal_akhir());
         holder.berat_fermentasi.setText(listDataSedangFermentasi.get(position).getBerat_fermentasi());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(listDataSedangFermentasi.get(holder.getAdapterPosition()));
+            }
+        });
+
     }
 
     @Override
@@ -51,5 +65,9 @@ public class ListSortingBagusSedangFermentasiAdapter extends RecyclerView.Adapte
             tanggal_akhir = itemView.findViewById(R.id.list_tanggal_selesai_fermentasi);
             berat_fermentasi = itemView.findViewById(R.id.berat_fermentasi);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(DataModelSortingBagusSedangFermentasi data);
     }
 }
