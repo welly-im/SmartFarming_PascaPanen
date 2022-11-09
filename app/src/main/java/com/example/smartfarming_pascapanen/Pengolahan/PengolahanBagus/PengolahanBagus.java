@@ -2,11 +2,15 @@ package com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,17 +30,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeBasah.DataModelMetodeBasahDataBulan;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeBasah.MetodeBasahSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.R;
-import com.example.smartfarming_pascapanen.RawData.Sorting.DashboardSorting;
-import com.example.smartfarming_pascapanen.RawData.Sorting.InputDataSorting;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,8 +49,11 @@ import java.util.Map;
 
 public class PengolahanBagus extends AppCompatActivity {
 
+    TextView nodata, nodata1, nodata2;
     Button tambahData;
-    Dialog infoPopUp, DialogPilihMetode, DialogPilihIdSorting, DialogDetailSedangFermentasi, DialogDetailSelesaiFermentasi, DialogSelesaikanFermentasi;
+    Dialog infoPopUp, DialogPilihMetode, DialogPilihIdSorting,
+            DialogDetailSedangFermentasi, DialogDetailSelesaiFermentasi,
+            DialogSelesaikanFermentasi;
 
     RecyclerView recyclerViewDataKopiBelumProses, recyclerViewDataKopiSedangFermentasi, recyclerViewDataKopiSedangPenjemuran;
     LinearLayoutManager linearLayoutManager, linearLayoutManager2, linearLayoutManager3;
@@ -61,8 +69,6 @@ public class PengolahanBagus extends AppCompatActivity {
     ListSortingBagusSedangPenjemuranAdapter adapter3;
     List<DataModelSortingBagusSedangPenjemuran> listData3;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +79,10 @@ public class PengolahanBagus extends AppCompatActivity {
         String nama_pengguna = i.getStringExtra("nama_pengguna");
 
         tambahData = findViewById(R.id.btnTambah);
+        nodata = findViewById(R.id.noData);
+        nodata1 = findViewById(R.id.noData1);
+        nodata2 = findViewById(R.id.noData2);
+
         infoPopUp = new Dialog(this);
         DialogPilihMetode = new Dialog(this);
         DialogPilihIdSorting = new Dialog(this);
@@ -83,6 +93,9 @@ public class PengolahanBagus extends AppCompatActivity {
         recyclerViewDataKopiSedangFermentasi = findViewById(R.id.recycler_view_sedang_fermentasi);
         recyclerViewDataKopiSedangPenjemuran = findViewById(R.id.recycler_view_sedang_penjemuran);
 
+        final FragmentManager fm = getSupportFragmentManager();
+        final DialogKonfirmasiProses dialogKonfirmasiProses = new DialogKonfirmasiProses();
+
 
         tambahData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +105,7 @@ public class PengolahanBagus extends AppCompatActivity {
         });
 
         GetKopiBelumProses();
-        GetKopiSedangFermentasi();
+        GetKopiSedangFermentasi(id_pengguna, nama_pengguna, dialogKonfirmasiProses, fm);
         GetKopiSedangPenjemuran();
 
     }
@@ -124,7 +137,7 @@ public class PengolahanBagus extends AppCompatActivity {
                     recyclerViewDataKopiBelumProses.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 } catch (Exception e) {
-                    Toast.makeText(PengolahanBagus.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    nodata.setTextSize(20);
                 }
             }
         }, new Response.ErrorListener() {
@@ -290,7 +303,7 @@ public class PengolahanBagus extends AppCompatActivity {
                                         intent.putExtra("nama_pengguna", nama_pengguna);
                                         intent.putExtra("id_fermentasi", id_fermentasi);
                                         intent.putExtra("id_sorting", id_sorting_jemur);
-                                        intent.putExtra("berat_fermentasi", berat);
+                                        intent.putExtra("berat_akhir_proses", berat);
                                         intent.putExtra("id_panen", id_panen);
                                         startActivity(intent);
                                         DialogPilihIdSorting.dismiss();
@@ -319,7 +332,7 @@ public class PengolahanBagus extends AppCompatActivity {
         DialogPilihIdSorting.show();
     }
 
-    private  void GetKopiSedangFermentasi(){
+    private  void GetKopiSedangFermentasi(String id_pengguna, String nama_pengguna, DialogKonfirmasiProses dialogKonfirmasiProses, FragmentManager fm){
         String url = getString(R.string.localhost)+"=getdatabagussedangprosesfermentasi";
         RequestQueue queue = Volley.newRequestQueue(PengolahanBagus.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -346,17 +359,17 @@ public class PengolahanBagus extends AppCompatActivity {
                     adapter2.setOnItemClickCallback(new ListSortingBagusSedangFermentasiAdapter.OnItemClickCallback() {
                         @Override
                         public void onItemClicked(DataModelSortingBagusSedangFermentasi data) {
-                            showSelectedData(data);
+                            showSelectedData(data, id_pengguna, nama_pengguna, dialogKonfirmasiProses, fm);
                         }
                     });
                 } catch (Exception e) {
-                    Toast.makeText(PengolahanBagus.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    nodata1.setTextSize(20);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PengolahanBagus.this,error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(PengolahanBagus.this, "Data fermentasi tidak ada!",Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);
@@ -387,19 +400,19 @@ public class PengolahanBagus extends AppCompatActivity {
                     recyclerViewDataKopiSedangPenjemuran.setAdapter(adapter3);
                     adapter3.notifyDataSetChanged();
                 } catch (Exception e) {
-                    Toast.makeText(PengolahanBagus.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    nodata2.setTextSize(20);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PengolahanBagus.this,error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(PengolahanBagus.this,"Data Penjemuran tidak ada!",Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);
     }
 
-    private void showSelectedData(DataModelSortingBagusSedangFermentasi data) {
+    private void showSelectedData(DataModelSortingBagusSedangFermentasi data, String id_pengguna, String nama_pengguna, DialogKonfirmasiProses dialogKonfirmasiProses, FragmentManager fm) {
         String url = getString(R.string.localhost)+"=findidfermentasi";
         RequestQueue queue = Volley.newRequestQueue(PengolahanBagus.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -411,6 +424,8 @@ public class PengolahanBagus extends AppCompatActivity {
                     String tanggal_mulai = jsonObject.getString("tanggal_awal_proses");
                     String tanggal_akhir = jsonObject.getString("tanggal_akhir_proses");
                     String berat_fermentasi = jsonObject.getString("berat_awal_proses");
+                    String id_panen = jsonObject.getString("id_panen");
+                    String id_sorting = jsonObject.getString("id_sorting_bagus");
                     String sisa_hari = jsonObject.getString("sisa_hari");
                     if( Integer.parseInt(sisa_hari) > 0){
                         DialogDetailSedangFermentasi.setContentView(R.layout.component_pengolahan_detail_bagus_sedang_fermentasi);
@@ -451,7 +466,7 @@ public class PengolahanBagus extends AppCompatActivity {
                         selesaikanFermentasi.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                selesaikanFermentasi(id_fermentasi, tanggal_mulai, berat_fermentasi);
+                                selesaikanFermentasi(id_fermentasi, id_panen, id_sorting, tanggal_mulai, berat_fermentasi, id_pengguna, nama_pengguna, dialogKonfirmasiProses, fm);
                                 DialogDetailSelesaiFermentasi.dismiss();
                             }
                         });
@@ -481,7 +496,7 @@ public class PengolahanBagus extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void selesaikanFermentasi(String id_fermentasi, String tanggal_mulai, String berat_fermentasi) {
+    private void selesaikanFermentasi(String id_fermentasi, String id_panen, String id_sorting, String tanggal_mulai, String berat_fermentasi, String id_pengguna, String nama_pengguna, DialogKonfirmasiProses dialogKonfirmasiProses, FragmentManager fm) {
         DialogSelesaikanFermentasi.setContentView(R.layout.component_pengolahan_detail_bagus_selesaikan_fermentasi);
         TextView txtIdFermentasi, txtTanggalMulai, txtBeratFermentasi;
         EditText txtBeratAkhir, txtTanggalAkhir;
@@ -499,7 +514,27 @@ public class PengolahanBagus extends AppCompatActivity {
         txtIdFermentasi.setText(id_fermentasi);
         txtTanggalMulai.setText(tanggal_mulai);
         txtBeratFermentasi.setText(berat_fermentasi);
+        txtBeratAkhir.setHint(berat_fermentasi);
         txtTanggalAkhir.setText(tglSekarang);
+
+        txtTanggalAkhir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(PengolahanBagus.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month + 1;
+                        String date = year + "-" + month + "-" + day;
+                        txtTanggalAkhir.setText(date);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
 
         btnSelesaikan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -509,42 +544,17 @@ public class PengolahanBagus extends AppCompatActivity {
                 if (berat_akhir.isEmpty() || tanggal_akhir.isEmpty()) {
                     Toast.makeText(PengolahanBagus.this, "Data tidak boleh kosong!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    String url = getString(R.string.localhost) + "=updatedatafermentasi";
-                    RequestQueue queue = Volley.newRequestQueue(PengolahanBagus.this);
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                String status = jsonObject.getString("status");
-                                String pesan = jsonObject.getString("pesan");
-                                if (status.equals("1")) {
-                                    ShowInfoPopup(pesan);
-                                    DialogSelesaikanFermentasi.dismiss();
-                                } else if (status.equals("0")) {
-                                    ShowInfoPopup(pesan);
-                                    DialogSelesaikanFermentasi.dismiss();
-                                }
-                            } catch (Exception e) {
-                                Toast.makeText(PengolahanBagus.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(PengolahanBagus.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-                            params.put("id_fermentasi", id_fermentasi);
-                            params.put("berat_akhir_proses", berat_akhir);
-                            params.put("tanggal_akhir_proses", tanggal_akhir);
-                            return params;
-                        }
-                    };
-                    queue.add(stringRequest);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id_fermentasi",id_fermentasi);
+                    bundle.putString("berat_akhir",berat_akhir);
+                    bundle.putString("tanggal_akhir",tanggal_akhir);
+                    bundle.putString("id_pengguna",id_pengguna);
+                    bundle.putString("nama_pengguna",nama_pengguna);
+                    bundle.putString("id_sorting",id_sorting);
+                    bundle.putString("id_panen",id_panen);
+                    dialogKonfirmasiProses.setArguments(bundle);
+                    dialogKonfirmasiProses.show(fm, "Konfirmasi Proses");
+                    DialogSelesaikanFermentasi.dismiss();
                 }
             }
         });
@@ -553,29 +563,5 @@ public class PengolahanBagus extends AppCompatActivity {
         DialogSelesaikanFermentasi.getWindow().getAttributes().windowAnimations = androidx.appcompat.R.style.Animation_AppCompat_Dialog;
         DialogSelesaikanFermentasi.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         DialogSelesaikanFermentasi.show();
-    }
-
-    private void ShowInfoPopup(String pesan) {
-        Button ok;
-        TextView textInfo;
-        infoPopUp.setContentView(R.layout.component_info);
-        ok = infoPopUp.findViewById(R.id.ok);
-        textInfo = infoPopUp.findViewById(R.id.showinfo);
-
-        textInfo.setText(pesan);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PengolahanBagus.this, PengolahanBagus.class);
-                startActivity(intent);
-                finish();
-                infoPopUp.dismiss();
-            }
-        });
-        infoPopUp.getWindow().setLayout(1000, 1000);
-        infoPopUp.getWindow().setGravity(Gravity.BOTTOM);
-        infoPopUp.getWindow().getAttributes().windowAnimations = androidx.appcompat.R.style.Animation_AppCompat_Dialog;
-        infoPopUp.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        infoPopUp.show();
     }
 }

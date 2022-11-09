@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">SI SMART Panen</string>
     <string name="localhost">http://192.168.0.105/server-ta/?smartfarming</string>
-    <string name="localhost3">https://sismartfarming.000webhostapp.com/?smartfarming</string>
-    <string name="localhost1">http://192.168.43.95/server-ta/?smartfarming</string>
+    <string name="localhost1">https://sismartfarming.000webhostapp.com/?smartfarming</string>
+    <string name="localhost2">http://192.168.43.95/server-ta/?smartfarming</string>
 
     <string name="desc_fermentasi">Anda disarankan melihat detail cuaca ditahun lalu, untuk memprediksi bulan berapa yang cocok untuk proses penjemuran.</string>
+    <string name="desc_pengeringan">Anda disarankan melihat detail cuaca ditahun lalu, untuk membantu memutuskan tanggal berapa kopi selesai dijemur</string>
 </resources>

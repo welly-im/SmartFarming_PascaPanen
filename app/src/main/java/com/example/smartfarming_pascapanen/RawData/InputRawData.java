@@ -2,11 +2,13 @@ package com.example.smartfarming_pascapanen.RawData;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +20,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smartfarming_pascapanen.LoginPage;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.R;
+import com.example.smartfarming_pascapanen.RawData.Sorting.InputDataSorting;
 
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -33,7 +38,7 @@ public class InputRawData extends AppCompatActivity {
     TextView textNama;
     EditText IDPanen, BeratPanen, TanggalPanen;
     Button btnTambahData, btnHapusData;
-    Dialog dialogPopUp, infoPopUp;
+    Dialog dialogPopUp, infoPopUp, infoLanjutPopUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class InputRawData extends AppCompatActivity {
 
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
+        infoLanjutPopUp = new Dialog(this);
 
         textNama = findViewById(R.id.nama_pengguna);
         IDPanen = findViewById(R.id.id_panen);
@@ -75,9 +81,32 @@ public class InputRawData extends AppCompatActivity {
         btnHapusData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IDPanen.setText("");
-                BeratPanen.setText("");
-                TanggalPanen.setText("");
+                //backto intent
+                Intent back = new Intent(InputRawData.this, MenuRaw.class);
+            }
+        });
+
+        TanggalPanen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(InputRawData.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        TanggalPanen.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
             }
         });
 
@@ -107,7 +136,7 @@ public class InputRawData extends AppCompatActivity {
                             String status = jsonObject.getString("status");
                             String pesan = jsonObject.getString("pesan");
                             if (status.equals("1")) {
-                                ShowInfoPopup(v, id_pengguna_input, nama_pengguna_input,status, pesan);
+                                ShowInfoLanjutPopup(v, id_panen, id_pengguna_input, nama_pengguna_input,status, pesan);
                                 dialogPopUp.dismiss();
                             } else if (status.equals("0")) {
                                 ShowInfoPopup(v, id_pengguna_input, nama_pengguna_input, status, pesan);
@@ -169,6 +198,50 @@ public class InputRawData extends AppCompatActivity {
         });
         infoPopUp.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         infoPopUp.show();
+    }
+
+    private void ShowInfoLanjutPopup(View v, String id_panen, String id_pengguna_input, String nama_pengguna_input, String status, String pesan) {
+        Button ok, lanjut;
+        TextView textInfo;
+        infoLanjutPopUp.setContentView(R.layout.component_info_lanjutkan);
+        ok = infoLanjutPopUp.findViewById(R.id.ok);
+        lanjut = infoLanjutPopUp.findViewById(R.id.lanjut);
+        textInfo = infoLanjutPopUp.findViewById(R.id.showinfo);
+
+        textInfo.setText(pesan);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoLanjutPopUp.dismiss();
+                //settimeout
+                if (status.equals("1")){
+                    new android.os.Handler().postDelayed(
+                            new Runnable() {
+                                public void run() {
+                                    Intent intent = new Intent(InputRawData.this, Raw.class);
+                                    intent.putExtra("id_pengguna", id_pengguna_input);
+                                    intent.putExtra("nama_pengguna", nama_pengguna_input);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }, 1000);
+                }
+            }
+        });
+        lanjut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InputRawData.this, InputDataSorting.class);
+                intent.putExtra("id_pengguna", id_pengguna_input);
+                intent.putExtra("nama_pengguna", nama_pengguna_input);
+                intent.putExtra("id_panen", id_panen);
+                startActivity(intent);
+                finish();
+                infoLanjutPopUp.dismiss();
+            }
+        });
+        infoLanjutPopUp.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        infoLanjutPopUp.show();
     }
 
 }

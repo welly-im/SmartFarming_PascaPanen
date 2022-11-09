@@ -46,24 +46,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="METODE"
+                        android:text="MENU"
                         android:textColor="@color/yellow"
                         android:fontFamily="sans-serif-black"
                         android:textSize="20sp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BASAH"
+                        android:text="FERMENTASI"
                         android:textColor="@color/white"
                         android:fontFamily="sans-serif-black"
-                        android:textSize="40sp"/>
+                        android:textSize="36dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="FERMENTASI + PENGERINGAN"
+                        android:text="Tahap menghasilkan reaksi kimia dalam biji kopi"
                         android:textColor="@color/white"
                         android:fontFamily="sans-serif-medium"
-                        android:textSize="14sp"/>
+                        android:textSize="10sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -90,17 +90,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="KERING"
+                        android:text="PENGERINGAN"
                         android:textColor="@color/white"
                         android:fontFamily="sans-serif-black"
-                        android:textSize="40sp"/>
+                        android:textSize="36sp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PENGERINGAN"
+                        android:text="Tahap penurunan kadar air dalam biji kopi"
                         android:textColor="@color/white"
                         android:fontFamily="sans-serif-medium"
-                        android:textSize="14sp"/>
+                        android:textSize="10sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

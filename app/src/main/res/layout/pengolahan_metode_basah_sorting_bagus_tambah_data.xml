@@ -154,7 +154,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="14dp"
-                        android:inputType="datetime"
+                        android:editable="false"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:padding="10dip"
                         android:background="@drawable/rounded_input"
                         />
@@ -174,14 +176,16 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="14dp"
-                        android:inputType="datetime"
+                        android:editable="false"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:padding="10dip"
                         android:background="@drawable/rounded_input"
                         />
                     <androidx.cardview.widget.CardView
                         android:layout_marginTop="20dp"
                         app:cardBackgroundColor="@color/black"
-                        app:cardCornerRadius="10dp"
+                        app:cardCornerRadius="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <LinearLayout
@@ -208,7 +212,7 @@
                             </LinearLayout>
                             <androidx.cardview.widget.CardView
                                 app:cardBackgroundColor="#B5B4B2"
-                                app:cardCornerRadius="10dp"
+                                app:cardCornerRadius="5dp"
                                 android:layout_marginHorizontal="20dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -270,7 +274,7 @@
                         android:id="@+id/lihat_detail_cuaca"
                         android:layout_marginTop="20dp"
                         app:cardBackgroundColor="@color/red_old"
-                        app:cardCornerRadius="10dp"
+                        app:cardCornerRadius="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <LinearLayout

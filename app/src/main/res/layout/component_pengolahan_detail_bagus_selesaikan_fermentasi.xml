@@ -146,6 +146,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:hint="0"
+                    android:textColorHint="#6AFFFFFF"
                     android:textSize="14dp"
                     android:inputType="datetime"
                     android:padding="10dip"
@@ -168,6 +170,9 @@
                     android:textColor="@color/white"
                     android:textSize="14dp"
                     android:inputType="datetime"
+                    android:editable="false"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:padding="10dip"
                     android:background="@drawable/rounded_input"
                     />

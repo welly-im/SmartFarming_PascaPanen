@@ -2,11 +2,15 @@ package com.example.smartfarming_pascapanen.RawData.Sorting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.R;
 import com.example.smartfarming_pascapanen.RawData.InputRawData;
 import com.example.smartfarming_pascapanen.RawData.Raw;
@@ -24,6 +29,7 @@ import com.example.smartfarming_pascapanen.RawData.Raw;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -102,6 +108,56 @@ public class InputDataSorting extends AppCompatActivity {
             }
         });
 
+        edtTanggalSorting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(InputDataSorting.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        edtTanggalSorting.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
+            }
+        });
+
+       //change edtBeratSortingJelek from calculate txtBeratPanen and edtBeratSortingBagus
+        edtBeratSortingBagus.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (edtBeratSortingBagus.getText().toString().equals("")) {
+                    edtBeratSortingJelek.setText(txtBeratPanen.getText().toString());
+                } else {
+                    int berat_panen = Integer.parseInt(txtBeratPanen.getText().toString());
+                    int berat_sorting_bagus = Integer.parseInt(edtBeratSortingBagus.getText().toString());
+                    int berat_sorting_jelek = berat_panen - berat_sorting_bagus;
+                    edtBeratSortingJelek.setText(String.valueOf(berat_sorting_jelek));
+                    if (berat_sorting_jelek < 0 || berat_sorting_bagus < 0) {
+                        edtBeratSortingJelek.setError("Berat tidak sesuai!");
+                        edtBeratSortingBagus.setError("Berat tidak sesuai!");
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void getInfoIDPanen(String id_panen) {

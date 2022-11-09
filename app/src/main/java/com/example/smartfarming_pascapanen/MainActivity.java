@@ -19,10 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.smartfarming_pascapanen.Pengolahan.Pengolahan;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
 import com.example.smartfarming_pascapanen.RawData.MenuRaw;
-import com.example.smartfarming_pascapanen.RawData.Raw;
 
 import org.json.JSONException;
 import org.json.JSONObject;

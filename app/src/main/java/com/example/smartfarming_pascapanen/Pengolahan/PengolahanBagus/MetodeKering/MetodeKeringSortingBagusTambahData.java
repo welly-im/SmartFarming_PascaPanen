@@ -1,12 +1,15 @@
 package com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.smartfarming_pascapanen.Informasi.InformasiCuaca;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeBasah.MetodeBasahSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
 import com.example.smartfarming_pascapanen.R;
@@ -24,6 +28,7 @@ import com.example.smartfarming_pascapanen.R;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -31,10 +36,11 @@ import java.util.Map;
 
 public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
 
-    TextView txtIDFermentasi,txtNamaPengguna, txtBeratFermentasi;
+    TextView txtIDFermentasi,txtNamaPengguna, txtBeratFermentasi, target_tKulit, target_dKulit;
     EditText IdPenjemuran, tglAwalProses, tglAkhirProses;
     Button btnTambahData, btnHapusData;
     Dialog dialogPopUp, infoPopUp;
+    CardView lihatDetailCuaca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,7 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
         String nama_pengguna = i.getStringExtra("nama_pengguna");
         String id_fermentasi = i.getStringExtra("id_fermentasi");
         String id_sorting = i.getStringExtra("id_sorting");
-        String berat_fermentasi = i.getStringExtra("berat_fermentasi");
+        String berat_fermentasi = i.getStringExtra("berat_akhir_proses");
         String id_panen = i.getStringExtra("id_panen");
 
         IdPenjemuran = findViewById(R.id.id_penjemuran);
@@ -57,11 +63,20 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
         tglAkhirProses = findViewById(R.id.tanggal_akhir_penjemuran);
         btnTambahData = findViewById(R.id.tambah_proses);
         btnHapusData = findViewById(R.id.hapus_data);
-
+        target_dKulit = findViewById(R.id.target_dengan_kulit);
+        target_tKulit = findViewById(R.id.target_tanpa_kulit);
+        lihatDetailCuaca = findViewById(R.id.lihat_detail_cuaca);
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
 
-        String GenIdPenjemuran = "PEN" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());;
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 25);
+        Date tanggal = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String tanggal25Selanjutnya = dateFormat.format(tanggal);
+
+
+        String GenIdPenjemuran = "PEN" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "SBA";;
         String dateNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         IdPenjemuran.setText(GenIdPenjemuran);
@@ -69,7 +84,15 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
         txtNamaPengguna.setText(nama_pengguna);
         txtBeratFermentasi.setText(berat_fermentasi);
         tglAwalProses.setText(dateNow);
-        tglAkhirProses.setText(dateNow);
+        tglAkhirProses.setText(tanggal25Selanjutnya);
+
+        int dengan_kulit = Integer.parseInt(berat_fermentasi) * 35 / 100;
+        int tanpa_kulit = Integer.parseInt(berat_fermentasi) * 25 / 100;
+
+        target_dKulit.setText(dengan_kulit+"Kg" +" - "+ (dengan_kulit+2)+"Kg");
+        target_tKulit.setText((tanpa_kulit-1)+"Kg" +" - "+ (tanpa_kulit+1)+"Kg");
+
+
 
         btnTambahData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +119,62 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
                 }
             }
         });
+
+        lihatDetailCuaca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MetodeKeringSortingBagusTambahData.this, InformasiCuaca.class);
+                startActivity(i);
+            }
+        });
+
+        tglAwalProses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final  Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeKeringSortingBagusTambahData.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        tglAwalProses.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
+            }
+        });
+
+        tglAkhirProses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final  Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_YEAR, 25);
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeKeringSortingBagusTambahData.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        tglAkhirProses.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
     }
 
     private void InputDataPenjemuran(String id_penjemuran, String id_fermentasi_jemur, String id_pengguna_jemur, String id_panen_jemur, String id_sorting_jemur, String berat_fermentasi_jemur, String tgl_awal_proses, String tgl_akhir_proses, String nama_pengguna_jemur) {

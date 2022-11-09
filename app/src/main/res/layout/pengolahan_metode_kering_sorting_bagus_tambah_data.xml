@@ -110,147 +110,277 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID Penjemuran"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-black" />
-            <EditText
-                android:id="@+id/id_penjemuran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:padding="10dip"
-                android:background="@drawable/rounded_input"
-                />
-            <TextView
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tanggal Mulai Penjemuran"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-black" />
-            <EditText
-                android:id="@+id/tanggal_mulai_penjemuran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:inputType="datetime"
-                android:padding="10dip"
-                android:background="@drawable/rounded_input"
-                />
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tanggal Akhir Penjemuran"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-black" />
-            <EditText
-                android:id="@+id/tanggal_akhir_penjemuran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:inputType="datetime"
-                android:padding="10dip"
-                android:background="@drawable/rounded_input"
-                />
-
             <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID Penjemuran"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-black" />
+                <EditText
+                    android:id="@+id/id_penjemuran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:padding="10dip"
+                    android:background="@drawable/rounded_input"
+                    />
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Mulai Penjemuran"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-black" />
+                <EditText
+                    android:id="@+id/tanggal_mulai_penjemuran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:editable="false"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="10dip"
+                    android:background="@drawable/rounded_input"
+                    />
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Akhir Penjemuran"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-black" />
+                <EditText
+                    android:id="@+id/tanggal_akhir_penjemuran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:editable="false"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="10dip"
+                    android:background="@drawable/rounded_input"
+                    />
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Disarankan di bulan : "
-                        android:fontFamily="sans-serif-black"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Maret - Agustus"
-                        android:fontFamily="sans-serif-black"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
+                    android:paddingHorizontal="2dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:layout_gravity="center_vertical"
                         android:src="@drawable/i_info"
-                        android:layout_width="35dp"
+                        android:layout_width="20dp"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bulan tersebut di dominasi cuaca panas sehingga lebih efisien "
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Lama penjemuran disarankan 25 hari \ndi cuaca yang panas"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:fontFamily="sans-serif-medium" />
+                        android:textSize="10sp"/>
                 </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/black"
+                    app:cardCornerRadius="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:paddingHorizontal="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/i_info"
+                                android:layout_width="25dp"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Target berat kopi selesai proses"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:fontFamily="sans-serif-black" />
+                        </LinearLayout>
+                        <androidx.cardview.widget.CardView
+                            app:cardBackgroundColor="#B5B4B2"
+                            app:cardCornerRadius="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_gravity="center_horizontal"
+                                android:gravity="center_horizontal"
+                                android:layout_marginVertical="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:id="@+id/target_dengan_kulit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0kg - 0Kg"
+                                        android:textColor="@color/black"
+                                        android:textSize="16sp"
+                                        android:fontFamily="sans-serif-black" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="Berat kopi dengan kulit"
+                                        android:textColor="@color/black"
+                                        android:textSize="10sp"/>
+                                </LinearLayout>
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginVertical="3dp"
+                                    android:background="@color/black" />
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:id="@+id/target_tanpa_kulit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0kg - 0Kg"
+                                        android:textColor="@color/black"
+                                        android:textSize="16sp"
+                                        android:fontFamily="sans-serif-black" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="Berat kopi tanpa kulit"
+                                        android:textColor="@color/black"
+                                        android:textSize="10sp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lihat_detail_cuaca"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/green_old"
+                    app:cardCornerRadius="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/i_info"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:paddingVertical="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lihat detail cuaca "
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:fontFamily="sans-serif-black" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Klik disini)"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:fontFamily="sans-serif-medium" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/desc_pengeringan"
+                                android:textColor="@color/white"
+                                android:textSize="8sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/tambah_proses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:backgroundTint="@color/green"
+                        android:text="SIMPAN"
+                        android:paddingHorizontal="25dp"
+                        android:paddingVertical="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <Button
+                        android:id="@+id/hapus_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:fontFamily="sans-serif-black"
+                        android:paddingHorizontal="25dp"
+                        android:paddingVertical="10dp"
+                        android:layout_marginRight="20dp"
+                        android:text="HAPUS"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tambah_proses" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/tambah_proses"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
-                    android:backgroundTint="@color/green"
-                    android:text="SIMPAN"
-                    android:paddingHorizontal="25dp"
-                    android:paddingVertical="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <Button
-                    android:id="@+id/hapus_data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/red"
-                    android:fontFamily="sans-serif-black"
-                    android:paddingHorizontal="25dp"
-                    android:paddingVertical="10dp"
-                    android:layout_marginRight="20dp"
-                    android:text="HAPUS"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tambah_proses" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

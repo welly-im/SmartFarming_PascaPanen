@@ -5,11 +5,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +22,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.smartfarming_pascapanen.Informasi.InformasiCuaca;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
 import com.example.smartfarming_pascapanen.R;
+import com.example.smartfarming_pascapanen.RawData.InputRawData;
+import com.example.smartfarming_pascapanen.RawData.Raw;
 import com.example.smartfarming_pascapanen.RawData.Sorting.DashboardSorting;
 import com.example.smartfarming_pascapanen.RawData.Sorting.InputDataSorting;
 
@@ -30,6 +36,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +47,7 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
     TextView txtIDSorting,txtNamaPengguna, txtBeratSorting;
     EditText IdFermentasi, tglAwalProses, tglAkhirProses;
     Button btnTambahData, btnHapusData;
-    Dialog dialogPopUp, infoPopUp;
+    Dialog dialogPopUp, infoPopUp, infoLanjutPopUp;
     RecyclerView recyclerViewDataBulanPanas;
     LinearLayoutManager linearLayoutManager;
     ListMetodeBasahDataBulanAdapter listMetodeBasahDataBulanAdapter;
@@ -73,16 +80,18 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
 
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
+        infoLanjutPopUp = new Dialog(this);
 
-        String GenIdFermentasi = "F" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());;
+        String GenIdFermentasi = "F" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) +"SBA";
         String dateNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String OneDayLater = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24)));
 
         IdFermentasi.setText(GenIdFermentasi);
         txtIDSorting.setText(id_sorting);
         txtNamaPengguna.setText(nama_pengguna);
         txtBeratSorting.setText(berat_sorting);
         tglAwalProses.setText(dateNow);
-        tglAkhirProses.setText(dateNow);
+        tglAkhirProses.setText(OneDayLater);
 
         btnTambahData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +114,61 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
                 } else {
                     InputDataFermentasi(id_fermentasi, id_sorting, id_panen_sorting, id_pengguna_sorting, berat_sorting, tanggal_mulai_fermentasi, tanggal_akhir_fermentasi, nama_pengguna_sorting);
                 }
+            }
+        });
+
+        lihatDetailCuaca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MetodeBasahSortingBagusTambahData.this, InformasiCuaca.class);
+                startActivity(i);
+            }
+        });
+
+        tglAwalProses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeBasahSortingBagusTambahData.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        tglAwalProses.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
+            }
+        });
+
+        tglAkhirProses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeBasahSortingBagusTambahData.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        tglAkhirProses.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
             }
         });
 
@@ -136,7 +200,7 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
                             String status = jsonObject.getString("status");
                             String pesan = jsonObject.getString("pesan");
                             if (status.equals("1")) {
-                                ShowInfoPopup(view, id_pengguna_sorting, nama_pengguna_sorting,status, pesan);
+                                ShowInfoPopup(view, id_pengguna_sorting, nama_pengguna_sorting, status, pesan);
                                 dialogPopUp.dismiss();
                             } else if (status.equals("0")) {
                                 ShowInfoPopup(view, id_pengguna_sorting, nama_pengguna_sorting, status, pesan);
@@ -236,5 +300,9 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
+    }
+
+    private void pilihBulan(){
+
     }
 }

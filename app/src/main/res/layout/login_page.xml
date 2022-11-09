@@ -88,6 +88,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:text="guest"
+                            android:hint="Masukkan nama pengguna"
+                            android:textColorHint="#BAFFFFFF"
                             android:textSize="14dp"
                             android:inputType="textPersonName"
                             android:padding="10dip"
