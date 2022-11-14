@@ -87,7 +87,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="guest"
+
                             android:hint="Masukkan nama pengguna"
                             android:textColorHint="#BAFFFFFF"
                             android:textSize="14dp"
@@ -111,8 +111,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="12345678"
+
                         android:textSize="14dp"
+                        android:hint="Masukkan kata sandi anda"
+                        android:textColorHint="#BAFFFFFF"
                         android:inputType="textPassword"
                         android:padding="10dip"
                         android:background="@drawable/rounded_edittext"

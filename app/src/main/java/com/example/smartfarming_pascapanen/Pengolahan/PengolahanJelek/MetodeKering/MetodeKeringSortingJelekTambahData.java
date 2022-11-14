@@ -1,9 +1,7 @@
-package com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeBasah;
+package com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.MetodeKering;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -25,78 +23,81 @@ import com.android.volley.toolbox.Volley;
 import com.example.smartfarming_pascapanen.Informasi.InformasiCuaca;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.MetodeBasah.MetodeBasahSortingJelekTambahData;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.PengolahanJelek;
 import com.example.smartfarming_pascapanen.R;
-import com.example.smartfarming_pascapanen.RawData.InputRawData;
-import com.example.smartfarming_pascapanen.RawData.Raw;
-import com.example.smartfarming_pascapanen.RawData.Sorting.DashboardSorting;
-import com.example.smartfarming_pascapanen.RawData.Sorting.InputDataSorting;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
-    TextView txtIDSorting,txtNamaPengguna, txtBeratSorting;
-    EditText IdFermentasi, tglAwalProses, tglAkhirProses;
+public class MetodeKeringSortingJelekTambahData extends AppCompatActivity {
+
+    TextView txtIDFermentasi,txtNamaPengguna, txtBeratFermentasi, target_tKulit, target_dKulit;
+    EditText IdPenjemuran, tglAwalProses, tglAkhirProses;
     Button btnTambahData, btnKembali;
-    Dialog dialogPopUp, infoPopUp, infoLanjutPopUp;
-    RecyclerView recyclerViewDataBulanPanas;
-    LinearLayoutManager linearLayoutManager;
-    ListMetodeBasahDataBulanAdapter listMetodeBasahDataBulanAdapter;
-    List<DataModelMetodeBasahDataBulan> listDataBulan;
-    DataModelMetodeBasahDataBulan dataModelMetodeBasahDataBulan;
+    Dialog dialogPopUp, infoPopUp;
     CardView lihatDetailCuaca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pengolahan_metode_basah_sorting_bagus_tambah_data);
-
+        setContentView(R.layout.pengolahan_metode_kering_sorting_jelek_tambah_data);
         Intent i = getIntent();
         String id_pengguna = i.getStringExtra("id_pengguna");
         String nama_pengguna = i.getStringExtra("nama_pengguna");
+        String id_fermentasi = i.getStringExtra("id_fermentasi");
         String id_sorting = i.getStringExtra("id_sorting");
-        String berat_sorting = i.getStringExtra("berat_sorting");
+        String berat_fermentasi = i.getStringExtra("berat_akhir_proses");
         String id_panen = i.getStringExtra("id_panen");
 
-        IdFermentasi = findViewById(R.id.id_fermentasi);
-        txtIDSorting = findViewById(R.id.id_sorting);
+        IdPenjemuran = findViewById(R.id.id_penjemuran);
+        txtIDFermentasi = findViewById(R.id.id_fermentasi_jemur);
         txtNamaPengguna = findViewById(R.id.nama_pengguna);
-        txtBeratSorting = findViewById(R.id.info_berat_sorting);
-        tglAwalProses = findViewById(R.id.tanggal_mulai_fermentasi);
-        tglAkhirProses = findViewById(R.id.tanggal_akhir_fermentasi);
+        txtBeratFermentasi = findViewById(R.id.info_berat_akhir);
+        tglAwalProses = findViewById(R.id.tanggal_mulai_penjemuran);
+        tglAkhirProses = findViewById(R.id.tanggal_akhir_penjemuran);
         btnTambahData = findViewById(R.id.tambah_proses);
         btnKembali = findViewById(R.id.kembali);
+        target_dKulit = findViewById(R.id.target_dengan_kulit);
+        target_tKulit = findViewById(R.id.target_tanpa_kulit);
         lihatDetailCuaca = findViewById(R.id.lihat_detail_cuaca);
-        recyclerViewDataBulanPanas = findViewById(R.id.bulan_panas);
 
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
-        infoLanjutPopUp = new Dialog(this);
 
-        String GenIdFermentasi = "F" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) +"SBA";
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 25);
+        Date tanggal = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String tanggal25Selanjutnya = dateFormat.format(tanggal);
+
+
+        String GenIdPenjemuran = "PEN" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "SJE";;
         String dateNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        String OneDayLater = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24)));
 
-        IdFermentasi.setText(GenIdFermentasi);
-        txtIDSorting.setText(id_sorting);
+        IdPenjemuran.setText(GenIdPenjemuran);
+        txtIDFermentasi.setText(id_fermentasi);
         txtNamaPengguna.setText(nama_pengguna);
-        txtBeratSorting.setText(berat_sorting);
+        txtBeratFermentasi.setText(berat_fermentasi);
         tglAwalProses.setText(dateNow);
-        tglAkhirProses.setText(OneDayLater);
+        tglAkhirProses.setText(tanggal25Selanjutnya);
+
+        int dengan_kulit = Integer.parseInt(berat_fermentasi) * 35 / 100;
+        int tanpa_kulit = Integer.parseInt(berat_fermentasi) * 25 / 100;
+
+        target_dKulit.setText(dengan_kulit+"Kg" +" - "+ (dengan_kulit+2)+"Kg");
+        target_tKulit.setText((tanpa_kulit-1)+"Kg" +" - "+ (tanpa_kulit+1)+"Kg");
 
         btnKembali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MetodeBasahSortingBagusTambahData.this, PengolahanBagus.class);
+                Intent i = new Intent(MetodeKeringSortingJelekTambahData.this, PengolahanJelek.class);
                 startActivity(i);
                 finish();
             }
@@ -105,23 +106,25 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         btnTambahData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id_fermentasi = IdFermentasi.getText().toString();
-                String id_sorting = txtIDSorting.getText().toString();
-                String id_panen_sorting = id_panen;
-                String id_pengguna_sorting = id_pengguna;
-                String nama_pengguna_sorting = txtNamaPengguna.getText().toString();
-                String berat_sorting = txtBeratSorting.getText().toString();
-                String tanggal_mulai_fermentasi = tglAwalProses.getText().toString();
-                String tanggal_akhir_fermentasi = tglAkhirProses.getText().toString();
+                String id_penjemuran = IdPenjemuran.getText().toString();
+                String id_fermentasi_jemur = id_fermentasi;
+                String id_pengguna_jemur = id_pengguna;
+                String id_panen_jemur = id_panen;
+                String id_sorting_jemur = id_sorting;
+                String berat_fermentasi_jemur = berat_fermentasi;
+                String nama_pengguna_jemur = nama_pengguna;
+                String tgl_awal_proses = tglAwalProses.getText().toString();
+                String tgl_akhir_proses = tglAkhirProses.getText().toString();
+
                 //setError if empty
-                if (id_fermentasi.isEmpty()) {
-                    IdFermentasi.setError("ID Fermentasi tidak boleh kosong!");
-                } else if (tanggal_mulai_fermentasi.isEmpty()){
-                    tglAwalProses.setError("Tanggal Awal Proses tidak boleh kosong!");
-                } else if (tanggal_akhir_fermentasi.isEmpty()) {
-                    tglAkhirProses.setError("Tanggal Akhir Proses tidak boleh kosong!");
+                if (id_penjemuran.isEmpty()) {
+                    IdPenjemuran.setError("ID Penjemuran tidak boleh kosong");
+                } else if (tgl_awal_proses.isEmpty()) {
+                    tglAwalProses.setError("Tanggal Awal Proses tidak boleh kosong");
+                } else if (tgl_akhir_proses.isEmpty()) {
+                    tglAkhirProses.setError("Tanggal Akhir Proses tidak boleh kosong");
                 } else {
-                    InputDataFermentasi(id_fermentasi, id_sorting, id_panen_sorting, id_pengguna_sorting, berat_sorting, tanggal_mulai_fermentasi, tanggal_akhir_fermentasi, nama_pengguna_sorting);
+                    InputDataPenjemuran(id_penjemuran, id_fermentasi_jemur, id_pengguna_jemur, id_panen_jemur, id_sorting_jemur, berat_fermentasi_jemur, tgl_awal_proses, tgl_akhir_proses, nama_pengguna_jemur);
                 }
             }
         });
@@ -129,7 +132,7 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         lihatDetailCuaca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MetodeBasahSortingBagusTambahData.this, InformasiCuaca.class);
+                Intent i = new Intent(MetodeKeringSortingJelekTambahData.this, InformasiCuaca.class);
                 startActivity(i);
             }
         });
@@ -137,12 +140,12 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         tglAwalProses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
+                final  Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeBasahSortingBagusTambahData.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeKeringSortingJelekTambahData.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         calendar.set(Calendar.YEAR, year);
@@ -161,19 +164,19 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         tglAkhirProses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
+                final  Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_YEAR, 25);
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeBasahSortingBagusTambahData.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MetodeKeringSortingJelekTambahData.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         calendar.set(Calendar.YEAR, year);
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, day);
-                        String myFormat = "yyyy-MM-dd";
-                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         tglAkhirProses.setText(sdf.format(calendar.getTime()));
                     }
                 }, year, month, day);
@@ -181,10 +184,9 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
             }
         });
 
-        GetDataBulanPanas();
     }
 
-    private void InputDataFermentasi(String id_fermentasi, String id_sorting, String id_panen_sorting, String id_pengguna_sorting, String berat_sorting, String tanggal_mulai_fermentasi, String tanggal_akhir_fermentasi, String nama_pengguna_sorting) {
+    private void InputDataPenjemuran(String id_penjemuran, String id_fermentasi_jemur, String id_pengguna_jemur, String id_panen_jemur, String id_sorting_jemur, String berat_fermentasi_jemur, String tgl_awal_proses, String tgl_akhir_proses, String nama_pengguna_jemur) {
         Button simpan, batal;
         dialogPopUp.setContentView(R.layout.component_dialog);
         batal = dialogPopUp.findViewById(R.id.batal);
@@ -199,8 +201,8 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = getString(R.string.localhost) + "=inputdatafermentasibarusortingbagus";
-                RequestQueue queue = Volley.newRequestQueue(MetodeBasahSortingBagusTambahData.this);
+                String url = getString(R.string.localhost) + "=inputdatapenjemuranbarusortingjelek";
+                RequestQueue queue = Volley.newRequestQueue(MetodeKeringSortingJelekTambahData.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -209,10 +211,10 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
                             String status = jsonObject.getString("status");
                             String pesan = jsonObject.getString("pesan");
                             if (status.equals("1")) {
-                                ShowInfoPopup(view, id_pengguna_sorting, nama_pengguna_sorting, status, pesan);
+                                ShowInfoPopup(view, id_pengguna_jemur, nama_pengguna_jemur,status, pesan);
                                 dialogPopUp.dismiss();
                             } else if (status.equals("0")) {
-                                ShowInfoPopup(view, id_pengguna_sorting, nama_pengguna_sorting, status, pesan);
+                                ShowInfoPopup(view, id_pengguna_jemur, nama_pengguna_jemur,status, pesan);
                                 dialogPopUp.dismiss();
                             }
                         } catch (Exception e) {
@@ -222,19 +224,21 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MetodeBasahSortingBagusTambahData.this, "Error", Toast.LENGTH_SHORT).show();
+                        //show error
+                        Toast.makeText(MetodeKeringSortingJelekTambahData.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<>();
-                        params.put("id_fermentasi", id_fermentasi);
-                        params.put("id_sorting_bagus", id_sorting);
-                        params.put("id_panen", id_panen_sorting);
-                        params.put("id_pengguna", id_pengguna_sorting);
-                        params.put("berat_awal_proses", berat_sorting);
-                        params.put("tanggal_awal_proses", tanggal_mulai_fermentasi);
-                        params.put("tanggal_akhir_proses", tanggal_akhir_fermentasi);
+                        params.put("id_penjemuran", id_penjemuran);
+                        params.put("id_fermentasi", id_fermentasi_jemur);
+                        params.put("id_pengguna", id_pengguna_jemur);
+                        params.put("id_panen", id_panen_jemur);
+                        params.put("id_sorting_jelek", id_sorting_jemur);
+                        params.put("berat_awal_proses", berat_fermentasi_jemur);
+                        params.put("tanggal_awal_proses", tgl_awal_proses);
+                        params.put("tanggal_akhir_proses", tgl_akhir_proses);
                         return params;
                     }
                 };
@@ -262,7 +266,7 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
                     new android.os.Handler().postDelayed(
                             new Runnable() {
                                 public void run() {
-                                    Intent intent = new Intent(MetodeBasahSortingBagusTambahData.this, PengolahanBagus.class);
+                                    Intent intent = new Intent(MetodeKeringSortingJelekTambahData.this, PengolahanJelek.class);
                                     intent.putExtra("id_pengguna", id_pengguna_sorting);
                                     intent.putExtra("nama_pengguna", nama_pengguna_sorting);
                                     startActivity(intent);
@@ -274,44 +278,5 @@ public class MetodeBasahSortingBagusTambahData extends AppCompatActivity {
         });
         infoPopUp.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         infoPopUp.show();
-    }
-
-    private void GetDataBulanPanas() {
-        String url = getString(R.string.localhost) + "=getbulanpanas";
-        RequestQueue queue = Volley.newRequestQueue(MetodeBasahSortingBagusTambahData.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listDataBulan = new ArrayList<>();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        dataModelMetodeBasahDataBulan = new DataModelMetodeBasahDataBulan();
-                        JSONObject object = jsonArray.getJSONObject(i);
-                        dataModelMetodeBasahDataBulan.setId_bulan(object.getString("id_bulan"));
-                        dataModelMetodeBasahDataBulan.setNama_bulan(object.getString("nama_bulan"));
-                        listDataBulan.add(dataModelMetodeBasahDataBulan);
-                    }
-                    linearLayoutManager = new LinearLayoutManager(MetodeBasahSortingBagusTambahData.this);
-                    recyclerViewDataBulanPanas.setLayoutManager(linearLayoutManager);
-                    listMetodeBasahDataBulanAdapter = new ListMetodeBasahDataBulanAdapter(MetodeBasahSortingBagusTambahData.this, listDataBulan);
-                    recyclerViewDataBulanPanas.setAdapter(listMetodeBasahDataBulanAdapter);
-                    listMetodeBasahDataBulanAdapter.notifyDataSetChanged();
-                } catch (Exception e) {
-                    Toast.makeText(MetodeBasahSortingBagusTambahData.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MetodeBasahSortingBagusTambahData.this, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        queue.add(stringRequest);
-    }
-
-    private void pilihBulan(){
-
     }
 }

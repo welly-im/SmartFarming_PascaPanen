@@ -22,8 +22,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/orange"
-                android:text="Selesai Proses Fermentasi"
+                android:textColor="@color/yellow"
+                android:text="Selesai Proses Penjemuran"
                 android:textSize="20dp"
                 android:fontFamily="sans-serif-black"
                 />
@@ -34,96 +34,96 @@
                 app:cardBackgroundColor="@color/black"
                 app:cardCornerRadius="10dp"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:padding="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Detail - "
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+               <LinearLayout
+                   android:padding="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-medium"
+                           android:text="Detail - "
+                           android:textAlignment="center"
+                           android:textColor="@color/white"
+                           android:textSize="20dp"
+                           android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/slsi_detail_id_fermentasi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="--"
-                            android:textAlignment="center"
-                            android:textColor="@color/orange"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                       <TextView
+                           android:id="@+id/slsi_detail_id_penjemuran"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-black"
+                           android:text="--"
+                           android:textAlignment="center"
+                           android:textColor="@color/yellow"
+                           android:textSize="20dp"
+                           android:textStyle="bold" />
+                   </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Berat Awal - "
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"/>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-medium"
+                           android:text="Berat Awal - "
+                           android:textAlignment="center"
+                           android:textColor="@color/white"
+                           android:textSize="14dp"/>
 
-                        <TextView
-                            android:id="@+id/slsi_detail_berat_fermentasi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="---"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Kg"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                       <TextView
+                           android:id="@+id/slsi_detail_berat_penjemuran"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-black"
+                           android:text="---"
+                           android:textAlignment="center"
+                           android:textColor="@color/white"
+                           android:textSize="14dp"
+                           android:textStyle="bold" />
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-black"
+                           android:text="Kg"
+                           android:textAlignment="center"
+                           android:textColor="@color/white"
+                           android:textSize="14dp"
+                           android:textStyle="bold" />
+                   </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Tanggal Awal -"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"/>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-medium"
+                           android:text="Tanggal Awal - "
+                           android:textAlignment="center"
+                           android:textColor="@color/white"
+                           android:textSize="14dp"/>
 
-                        <TextView
-                            android:id="@+id/slsi_detail_awal_fermentasi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="----"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
+                       <TextView
+                           android:id="@+id/slsi_detail_awal_penjemuran"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="sans-serif-black"
+                           android:text="----"
+                           android:textAlignment="center"
+                           android:textColor="@color/white"
+                           android:textSize="14dp"
+                           android:textStyle="bold" />
+                   </LinearLayout>
+               </LinearLayout>
             </androidx.cardview.widget.CardView>
 
 
@@ -155,12 +155,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Berat Akhir"
+                        android:text="Berat Akhir (Dengan kulit)"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:fontFamily="sans-serif-black" />
                     <EditText
-                        android:id="@+id/slsi_berat_akhir_fermentasi"
+                        android:id="@+id/slsi_berat_akhir_penjemuran"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -177,12 +177,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tanggal Akhir Fermentasi"
+                        android:text="Tanggal Akhir Penjemuran"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:fontFamily="sans-serif-black" />
                     <EditText
-                        android:id="@+id/final_tanggal_akhir_fermentasi"
+                        android:id="@+id/final_tanggal_akhir_penjemuran"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"

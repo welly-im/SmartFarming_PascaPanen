@@ -37,7 +37,7 @@ public class InputRawData extends AppCompatActivity {
 
     TextView textNama;
     EditText IDPanen, BeratPanen, TanggalPanen;
-    Button btnTambahData, btnHapusData;
+    Button btnTambahData, btnKembali;
     Dialog dialogPopUp, infoPopUp, infoLanjutPopUp;
 
     @Override
@@ -60,7 +60,7 @@ public class InputRawData extends AppCompatActivity {
         BeratPanen = findViewById(R.id.berat_panen);
         TanggalPanen = findViewById(R.id.tanggal_panen);
         btnTambahData = findViewById(R.id.tambah_panen);
-        btnHapusData = findViewById(R.id.hapus_data);
+        btnKembali = findViewById(R.id.kembali);
 
         textNama.setText(nama_pengguna);
         IDPanen.setText("P"+IDdate);
@@ -78,7 +78,7 @@ public class InputRawData extends AppCompatActivity {
             }
         });
 
-        btnHapusData.setOnClickListener(new View.OnClickListener() {
+        btnKembali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //backto intent

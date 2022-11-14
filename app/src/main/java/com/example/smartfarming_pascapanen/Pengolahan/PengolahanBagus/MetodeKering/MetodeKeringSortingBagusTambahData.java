@@ -38,7 +38,7 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
 
     TextView txtIDFermentasi,txtNamaPengguna, txtBeratFermentasi, target_tKulit, target_dKulit;
     EditText IdPenjemuran, tglAwalProses, tglAkhirProses;
-    Button btnTambahData, btnHapusData;
+    Button btnTambahData, btnKembali;
     Dialog dialogPopUp, infoPopUp;
     CardView lihatDetailCuaca;
 
@@ -62,10 +62,11 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
         tglAwalProses = findViewById(R.id.tanggal_mulai_penjemuran);
         tglAkhirProses = findViewById(R.id.tanggal_akhir_penjemuran);
         btnTambahData = findViewById(R.id.tambah_proses);
-        btnHapusData = findViewById(R.id.hapus_data);
+        btnKembali = findViewById(R.id.kembali);
         target_dKulit = findViewById(R.id.target_dengan_kulit);
         target_tKulit = findViewById(R.id.target_tanpa_kulit);
         lihatDetailCuaca = findViewById(R.id.lihat_detail_cuaca);
+
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
 
@@ -92,7 +93,14 @@ public class MetodeKeringSortingBagusTambahData extends AppCompatActivity {
         target_dKulit.setText(dengan_kulit+"Kg" +" - "+ (dengan_kulit+2)+"Kg");
         target_tKulit.setText((tanpa_kulit-1)+"Kg" +" - "+ (tanpa_kulit+1)+"Kg");
 
-
+        btnKembali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MetodeKeringSortingBagusTambahData.this, PengolahanBagus.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         btnTambahData.setOnClickListener(new View.OnClickListener() {
             @Override

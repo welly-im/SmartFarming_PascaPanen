@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.R;
 import com.example.smartfarming_pascapanen.RawData.InputRawData;
+import com.example.smartfarming_pascapanen.RawData.MenuRaw;
 import com.example.smartfarming_pascapanen.RawData.Raw;
 
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class InputDataSorting extends AppCompatActivity {
 
     TextView txtIDPanen,txtNamaPengguna, txtBeratPanen;
     EditText edtIDSortingBagus, edtBeratSortingBagus, edtTanggalSorting, edtIDSortingJelek, edtBeratSortingJelek;
-    Button btnTambahData, btnHapusData;
+    Button btnTambahData, btnKembali;
     Dialog dialogPopUp, infoPopUp;
 
     @Override
@@ -61,7 +62,7 @@ public class InputDataSorting extends AppCompatActivity {
         edtBeratSortingJelek = findViewById(R.id.berat_sorting_jelek);
         edtTanggalSorting = findViewById(R.id.tanggal_sorting);
         btnTambahData = findViewById(R.id.tambah_sorting);
-        btnHapusData = findViewById(R.id.hapus_sorting);
+        btnKembali = findViewById(R.id.kembali);
 
         String IDdate = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -77,14 +78,12 @@ public class InputDataSorting extends AppCompatActivity {
         dialogPopUp = new Dialog(this);
         infoPopUp = new Dialog(this);
 
-        btnHapusData.setOnClickListener(new View.OnClickListener() {
+        btnKembali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtIDSortingBagus.setText("SBA"+IDdate);
-                edtIDSortingJelek.setText("SJE"+IDdate);
-                edtTanggalSorting.setText(date);
-                edtBeratSortingBagus.setText("");
-                edtBeratSortingJelek.setText("");
+                Intent i = new Intent(InputDataSorting.this, MenuRaw.class);
+                startActivity(i);
+                finish();
             }
         });
 

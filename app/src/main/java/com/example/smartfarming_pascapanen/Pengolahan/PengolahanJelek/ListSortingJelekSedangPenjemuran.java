@@ -1,4 +1,4 @@
-package com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus;
+package com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,13 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.DataModelSortingBagusSedangPenjemuran;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.ListSortingBagusSedangPenjemuranAdapter;
 import com.example.smartfarming_pascapanen.R;
 
 import java.util.List;
 
-public class ListSortingBagusSedangPenjemuranAdapter extends RecyclerView.Adapter<ListSortingBagusSedangPenjemuranAdapter.Holder> {
+public class ListSortingJelekSedangPenjemuran extends RecyclerView.Adapter<ListSortingJelekSedangPenjemuran.Holder> {
 
-    List<DataModelSortingBagusSedangPenjemuran> listDataSedangPenjemuran;
+    List<DataModelSortingJelekSedangPenjemuran> listDataSedangPenjemuran;
     LayoutInflater inflater;
 
     private OnItemClickCallback onItemClickCallback;
@@ -24,7 +26,7 @@ public class ListSortingBagusSedangPenjemuranAdapter extends RecyclerView.Adapte
         this.onItemClickCallback = onItemClickCallback;
     }
 
-    public ListSortingBagusSedangPenjemuranAdapter(Context context, List<DataModelSortingBagusSedangPenjemuran> listDataSedangPenjemuran) {
+    public ListSortingJelekSedangPenjemuran(Context context, List<DataModelSortingJelekSedangPenjemuran> listDataSedangPenjemuran) {
         this.listDataSedangPenjemuran = listDataSedangPenjemuran;
         this.inflater = LayoutInflater.from(context);
     }
@@ -69,6 +71,6 @@ public class ListSortingBagusSedangPenjemuranAdapter extends RecyclerView.Adapte
     }
 
     public interface OnItemClickCallback {
-        void onItemClicked(DataModelSortingBagusSedangPenjemuran data);
+        void onItemClicked(DataModelSortingJelekSedangPenjemuran data);
     }
 }

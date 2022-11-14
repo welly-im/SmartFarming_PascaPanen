@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                     android:text="DETAIL - "
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -41,7 +41,7 @@
                     android:text="--"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -73,7 +73,7 @@
                                 android:text="Mulai - "
                                 android:textAlignment="center"
                                 android:textColor="@color/white"
-                                android:textSize="18dp"
+                                android:textSize="14dp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -84,7 +84,7 @@
                                 android:text="---"
                                 android:textAlignment="center"
                                 android:textColor="@color/yellow"
-                                android:textSize="18dp"
+                                android:textSize="14dp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -100,7 +100,7 @@
                                 android:text="Selesai - "
                                 android:textAlignment="center"
                                 android:textColor="@color/white"
-                                android:textSize="18dp"
+                                android:textSize="14dp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -111,7 +111,7 @@
                                 android:text="----"
                                 android:textAlignment="center"
                                 android:textColor="@color/orange"
-                                android:textSize="18dp"
+                                android:textSize="14dp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
@@ -134,7 +134,7 @@
                             android:text="100Kg"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="24dp"
+                            android:textSize="20dp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -260,7 +260,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/sisa_hari_fermentasi"
+                        android:id="@+id/sisa_hari_penjemuran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"

@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.PengolahanJelek;
 import com.example.smartfarming_pascapanen.RawData.MenuRaw;
 
 import org.json.JSONException;
@@ -110,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
 
         KopiBagus.setOnClickListener(v1 -> {
             Intent intent = new Intent(MainActivity.this, PengolahanBagus.class);
+            intent.putExtra("id_pengguna", id_pengguna);
+            intent.putExtra("nama_pengguna", nama_pengguna);
+            startActivity(intent);
+            DialogPilihSorting.dismiss();
+        });
+        KopiJelek.setOnClickListener(v1 -> {
+            Intent intent = new Intent(MainActivity.this, PengolahanJelek.class);
             intent.putExtra("id_pengguna", id_pengguna);
             intent.putExtra("nama_pengguna", nama_pengguna);
             startActivity(intent);
