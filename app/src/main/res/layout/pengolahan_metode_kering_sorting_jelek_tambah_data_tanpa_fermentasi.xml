@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahData">
+    tools:context=".Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahDataTanpaFermentasi">
 
     <LinearLayout
         android:orientation="vertical"
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Info Fermentasi"
+                android:text="Info Kopi"
                 android:fontFamily="sans-serif-black"
                 android:textColor="@color/yellow"
                 android:textSize="16sp"/>
@@ -64,23 +64,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ID FERMENTASI - "
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/id_fermentasi_jemur"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:text="Kopi Tidak DiFermentasi"
                     android:fontFamily="sans-serif-black"
-                    android:text="-----"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textColor="@color/red"
+                    android:textSize="14sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,7 +83,7 @@
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
                 <TextView
-                    android:id="@+id/info_berat_akhir"
+                    android:id="@+id/info_berat_akhirTF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -128,7 +118,7 @@
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-black" />
                 <EditText
-                    android:id="@+id/id_penjemuran"
+                    android:id="@+id/id_penjemuranTF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -146,7 +136,7 @@
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-black" />
                 <EditText
-                    android:id="@+id/tanggal_mulai_penjemuran"
+                    android:id="@+id/tanggal_mulai_penjemuranTF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -167,7 +157,7 @@
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-black" />
                 <EditText
-                    android:id="@+id/tanggal_akhir_penjemuran"
+                    android:id="@+id/tanggal_akhir_penjemuranTF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -352,7 +342,7 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/tambah_proses"
+                        android:id="@+id/tambah_prosesTF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
@@ -366,7 +356,7 @@
                         app:layout_constraintEnd_toEndOf="parent" />
 
                     <Button
-                        android:id="@+id/kembali"
+                        android:id="@+id/kembaliTF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
@@ -378,7 +368,7 @@
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tambah_proses" />
+                        app:layout_constraintEnd_toStartOf="@+id/tambah_prosesTF" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

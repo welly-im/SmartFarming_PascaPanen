@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -116,6 +117,17 @@ public class PengolahanBagus extends AppCompatActivity {
         GetKopiBelumProses();
         GetKopiSedangFermentasi(id_pengguna, nama_pengguna, dialogKonfirmasiProses, fm);
         GetKopiSedangPenjemuran(id_pengguna, nama_pengguna);
+
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                GetKopiBelumProses();
+                GetKopiSedangFermentasi(id_pengguna, nama_pengguna, dialogKonfirmasiProses, fm);
+                GetKopiSedangPenjemuran(id_pengguna, nama_pengguna);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 

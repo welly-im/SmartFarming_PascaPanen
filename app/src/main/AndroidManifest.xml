@@ -17,6 +17,48 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahDataTanpaFermentasi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GudangStok.HistoryPenjualanKopi.HistoryPenjualanKopi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GudangStok.JualKopi.TambahDataPenjualanKopi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GudangStok.JualKopi.GudangStokPenjualanKopi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GudangStok.GudangStokTambahData.GudangStokTambahData"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GudangStok.GudangStok"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahData"
             android:exported="false">
             <meta-data

@@ -5,10 +5,12 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.MetodeBasah.MetodeBasahSortingJelekTambahData;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahData;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahDataTanpaFermentasi;
 import com.example.smartfarming_pascapanen.R;
 
 import org.json.JSONArray;
@@ -115,6 +118,17 @@ public class PengolahanJelek extends AppCompatActivity {
         GetKopiBelumProses();
         GetKopiSedangFermentasi(id_pengguna, nama_pengguna, dialogKonfirmasiProsesJelek, fm);
         GetKopiSedangPenjemuran(id_pengguna, nama_pengguna);
+
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                GetKopiBelumProses();
+                GetKopiSedangFermentasi(id_pengguna, nama_pengguna, dialogKonfirmasiProsesJelek, fm);
+                GetKopiSedangPenjemuran(id_pengguna, nama_pengguna);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
     private void GetKopiBelumProses() {
         String url = getString(R.string.localhost)+"=getdatasortingjelekbelumproses";
@@ -262,12 +276,13 @@ public class PengolahanJelek extends AppCompatActivity {
     private void PilihIdSortingMetodeKering(View view, String id_pengguna, String nama_pengguna){
         DialogPilihIdSorting.setContentView(R.layout.component_pilih_id_sorting);
         TextView judul = DialogPilihIdSorting.findViewById(R.id.judul);
-        judul.setText("Pilih ID Fermentasi");
+        judul.setText("Pilih ID Sorting");
         TextView ket = DialogPilihIdSorting.findViewById(R.id.keteranganPilihId);
-        ket.setText("Silahkan pilih ID Fermentasi yang selesai diproses");
+        ket.setText("Anda akan memproses kopi tanpa fermentasi!!");
+        ket.setTextColor(Color.RED);
         AutoCompleteTextView textIDSorting = DialogPilihIdSorting.findViewById(R.id.autoCompleteTextViewPilihIDSorting);
         Button btnPilihIDSorting = DialogPilihIdSorting.findViewById(R.id.pilihIDSorting);
-        String url = getString(R.string.localhost)+"=getidjelekselesaiprosesfermentasi";
+        String url = getString(R.string.localhost)+"=getdatasortingjelekbelumproses";
         RequestQueue queue = Volley.newRequestQueue(PengolahanJelek.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -275,41 +290,36 @@ public class PengolahanJelek extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    String[] id_fermentasi = new String[jsonArray.length()];
                     String[] id_sorting = new String[jsonArray.length()];
                     String[] berat_sorting = new String[jsonArray.length()];
                     String[] id_panen = new String[jsonArray.length()];
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
-                        id_fermentasi[i] = object.getString("id_fermentasi");
-                        id_sorting[i] = object.getString("id_sorting_jelek");
-                        berat_sorting[i] = object.getString("berat_akhir_proses");
+                        id_sorting[i] = object.getString("id_sorting");
+                        berat_sorting[i] = object.getString("berat");
                         id_panen[i] = object.getString("id_panen");
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, id_fermentasi);
-                    ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, id_sorting);
-                    ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, berat_sorting);
-                    ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, id_panen);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, id_sorting);
+                    ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, berat_sorting);
+                    ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(PengolahanJelek.this, android.R.layout.simple_list_item_1, id_panen);
                     textIDSorting.setAdapter(adapter);
                     textIDSorting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            String id_sorting_jemur = adapter2.getItem(i);
-                            String berat = adapter3.getItem(i);
-                            String id_panen = adapter4.getItem(i);
+                            String berat = adapter2.getItem(i);
+                            String id_panen = adapter3.getItem(i);
                             btnPilihIDSorting.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    String id_fermentasi = textIDSorting.getText().toString();
+                                    String id_sorting = textIDSorting.getText().toString();
                                     if (textIDSorting.getText().toString().equals("Klik Disini Untuk Pilih ID")){
                                         Toast.makeText(PengolahanJelek.this, "ID Sorting Belum Dipilih", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Intent intent = new Intent(PengolahanJelek.this, MetodeKeringSortingJelekTambahData.class);
+                                        Intent intent = new Intent(PengolahanJelek.this, MetodeKeringSortingJelekTambahDataTanpaFermentasi.class);
                                         intent.putExtra("id_pengguna", id_pengguna);
                                         intent.putExtra("nama_pengguna", nama_pengguna);
-                                        intent.putExtra("id_fermentasi", id_fermentasi);
-                                        intent.putExtra("id_sorting", id_sorting_jemur);
-                                        intent.putExtra("berat_akhir_proses", berat);
+                                        intent.putExtra("id_sorting", id_sorting);
+                                        intent.putExtra("berat_sorting", berat);
                                         intent.putExtra("id_panen", id_panen);
                                         startActivity(intent);
                                         DialogPilihIdSorting.dismiss();
@@ -319,7 +329,6 @@ public class PengolahanJelek extends AppCompatActivity {
                             });
                         }
                     });
-
                 } catch (Exception e) {
                     Toast.makeText(PengolahanJelek.this, "Data kopi tidak ada!", Toast.LENGTH_SHORT).show();
                 }

@@ -47,7 +47,7 @@
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="320dp"
-            android:layout_height="440dp"
+            android:layout_height="wrap_content"
             app:cardBackgroundColor="#151515"
             app:cardCornerRadius="15dp"
             android:layout_marginTop="30dp">
@@ -87,7 +87,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-
                             android:hint="Masukkan nama pengguna"
                             android:textColorHint="#BAFFFFFF"
                             android:textSize="14dp"
@@ -111,10 +110,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-
-                        android:textSize="14dp"
                         android:hint="Masukkan kata sandi anda"
                         android:textColorHint="#BAFFFFFF"
+                        android:textSize="14dp"
                         android:inputType="textPassword"
                         android:padding="10dip"
                         android:background="@drawable/rounded_edittext"
@@ -125,7 +123,8 @@
                     android:id="@+id/login"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="MASUK"
+                    android:text="Masuk"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="20dp"
@@ -133,7 +132,33 @@
                     android:padding="10dp"
                     android:layout_marginTop="30dp"
                     />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="#151515"
+                    android:layout_marginBottom="30dp">
+
+                    <TextView
+                        android:id="@+id/info_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Kata Sandi"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="0dp" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
+
+
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

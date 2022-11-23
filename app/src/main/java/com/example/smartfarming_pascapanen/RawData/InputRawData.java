@@ -83,6 +83,8 @@ public class InputRawData extends AppCompatActivity {
             public void onClick(View view) {
                 //backto intent
                 Intent back = new Intent(InputRawData.this, MenuRaw.class);
+                startActivity(back);
+                finish();
             }
         });
 

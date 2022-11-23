@@ -30,6 +30,7 @@ import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.DataModelP
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.ListPengolahanBagusKonfirmasiDataCuacaAdapter;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.MetodeKering.MetodeKeringSortingBagusTambahData;
 import com.example.smartfarming_pascapanen.Pengolahan.PengolahanBagus.PengolahanBagus;
+import com.example.smartfarming_pascapanen.Pengolahan.PengolahanJelek.MetodeKering.MetodeKeringSortingJelekTambahData;
 import com.example.smartfarming_pascapanen.R;
 
 import org.json.JSONArray;
@@ -153,34 +154,17 @@ public class DialogKonfirmasiProsesJelek extends DialogFragment {
     }
 
     private void ShowInfoLanjutPopup(String pesan, String id_fermentasi, String id_sorting, String id_panen_sorting, String berat_akhir, String tanggal_akhir, String id_pengguna, String nama_pengguna) {
-        Button ok, lanjut;
+        Button lanjut;
         TextView textInfo;
-        infoLanjutPopUp.setContentView(R.layout.component_info_lanjutkan);
-        ok = infoLanjutPopUp.findViewById(R.id.ok);
+        infoLanjutPopUp.setContentView(R.layout.component_info_lanjutkan_sorting_jelek);
         lanjut = infoLanjutPopUp.findViewById(R.id.lanjut);
         textInfo = infoLanjutPopUp.findViewById(R.id.showinfo);
 
         textInfo.setText(pesan);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                infoLanjutPopUp.dismiss();
-                //settimeout
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                Intent intent = new Intent(infoPopUp.getContext(), PengolahanJelek.class);
-                                infoLanjutPopUp.getContext().startActivity(intent);
-                                infoLanjutPopUp.dismiss();
-                            }
-                        }, 1000);
-
-            }
-        });
         lanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(infoPopUp.getContext(), MetodeKeringSortingBagusTambahData.class);
+                Intent intent = new Intent(infoPopUp.getContext(), MetodeKeringSortingJelekTambahData.class);
                 intent.putExtra("id_pengguna", id_pengguna);
                 intent.putExtra("nama_pengguna", nama_pengguna);
                 intent.putExtra("id_panen", id_panen_sorting);
