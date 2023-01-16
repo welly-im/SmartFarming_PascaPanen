@@ -85,32 +85,35 @@ public class DashboardSorting extends AppCompatActivity {
                     if (status.equals("1")){
                         JSONArray jsonArray = new JSONArray(data);
                         String[] id_panen = new String[jsonArray.length()];
+                        String[] tanggal_panen = new String[jsonArray.length()];
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
                             id_panen[i] = object.getString("id_panen");
+                            tanggal_panen[i] = object.getString("tanggal_panen");
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(DashboardSorting.this, android.R.layout.simple_list_item_1, id_panen);
-                        textIDPanen.setAdapter(adapter);
+                        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(DashboardSorting.this, android.R.layout.simple_list_item_1, tanggal_panen) ;
+                        textIDPanen.setAdapter(adapter2);
                         textIDPanen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String id_panen = (String) parent.getItemAtPosition(position);
-                                textIDPanen.setText(id_panen);
+                                textIDPanen.setText(parent.getItemAtPosition(position).toString() +" ("+ adapter.getItem(position)+")");
+                                btnPilihIDPanen.setOnClickListener(v1 -> {
+                                    String id_panen_dipilih = adapter.getItem(position);
+                                    if (textIDPanen.getText().toString().equals("Klik Disini Untuk Pilih \nTanggal Panen")){
+                                        Toast.makeText(DashboardSorting.this, "Tanggal Panen Belum Dipilih", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Intent i = new Intent(DashboardSorting.this, InputDataSorting.class);
+                                        i.putExtra("id_panen", id_panen_dipilih);
+                                        i.putExtra("id_pengguna", id_pengguna);
+                                        i.putExtra("nama_pengguna", nama_pengguna);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
                             }
                         });
-                        btnPilihIDPanen.setOnClickListener(v1 -> {
-                            String id_panen_dipilih = textIDPanen.getText().toString();
-                            if (textIDPanen.getText().toString().equals("Klik Disini Untuk Pilih \nID Panen")){
-                                Toast.makeText(DashboardSorting.this, "ID Panen Belum Dipilih", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Intent i = new Intent(DashboardSorting.this, InputDataSorting.class);
-                                i.putExtra("id_panen", id_panen_dipilih);
-                                i.putExtra("id_pengguna", id_pengguna);
-                                i.putExtra("nama_pengguna", nama_pengguna);
-                                startActivity(i);
-                                finish();
-                            }
-                        });
+
                     }else{
                         Toast.makeText(DashboardSorting.this, "Data Kosong", Toast.LENGTH_SHORT).show();
                     }

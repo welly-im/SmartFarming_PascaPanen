@@ -2,6 +2,7 @@ package com.example.smartfarming_pascapanen.GudangStok.JualKopi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -87,35 +90,32 @@ public class TambahDataPenjualanKopi extends AppCompatActivity {
         harga_jualKopi.setText(harga_jual);
         harga_jual_per_kgKopi.setText(harga_jual_per_kg);
         keteranganKopi.setText(keterangan);
-        String IdPenjualan = "TJL" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + grade;
+        String IdPenjualan = "PJ" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + grade;
         edtIDPenjualan.setText(IdPenjualan);
         edtTanggalPenjualan.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
         edtHargaPenjualan.setHint(harga_jual + " adalah harga yang disarankan");
 
-
-        edtHargaPenjualan.addTextChangedListener(new TextWatcher() {
+        edtTanggalPenjualan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            }
-            private String current = "";
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!charSequence.toString().equals(current)){
-                    edtHargaPenjualan.removeTextChangedListener(this);
-                    String cleanString = charSequence.toString().replaceAll("[Rp,.]", "");
-                    double parsed = Double.parseDouble(cleanString);
-                    String formatted = NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format((parsed / 100));
-                    current = formatted;
-                    edtHargaPenjualan.setText(formatted);
-                    edtHargaPenjualan.setSelection(formatted.length());
-                    edtHargaPenjualan.addTextChangedListener(this);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+                DatePickerDialog datePickerDialog = new DatePickerDialog(TambahDataPenjualanKopi.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        edtTanggalPenjualan.setText(sdf.format(calendar.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
             }
         });
 
@@ -130,7 +130,7 @@ public class TambahDataPenjualanKopi extends AppCompatActivity {
         simpan.setOnClickListener(v -> {
             String id_penjualan = edtIDPenjualan.getText().toString();
             String tanggal_penjualan = edtTanggalPenjualan.getText().toString();
-            String harga_penjualan = edtHargaPenjualan.getText().toString().replaceAll("[Rp,.]", "");
+            String harga_penjualan = edtHargaPenjualan.getText().toString();
             harga_penjualan = harga_penjualan.substring(0, harga_penjualan.length() - 2);
             String id_pembeli = id_pembeli_fix[0];
             ShowPopup(id_pengguna, nama_pengguna, id_stok_kopi, berat_kopi, harga_jual, harga_penjualan, id_penjualan, tanggal_penjualan, id_pembeli);

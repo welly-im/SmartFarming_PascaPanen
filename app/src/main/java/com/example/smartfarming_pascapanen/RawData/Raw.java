@@ -70,7 +70,6 @@ public class Raw extends AppCompatActivity {
                         item.setBerat(obj.getString("berat"));
                         item.setTanggal_panen(obj.getString("tanggal_panen"));
                         item.setNama_pengguna(obj.getString("nama_pengguna"));
-                        // menambah item ke array
                         itemList.add(item);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -79,10 +78,9 @@ public class Raw extends AppCompatActivity {
                 listRawDataAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Raw.this,error.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Raw.this,error.toString(),Toast.LENGTH_SHORT).show();
             }
         });
         // menambah request ke request queue

@@ -548,8 +548,8 @@ public class PengolahanJelek extends AppCompatActivity {
                         txtBeratPenjemuran.setText(berat_penjemuran + "Kg");
                         txtSisaHari.setText(sisa_hari);
 
-                        int dengan_kulit = Integer.parseInt(berat_penjemuran) * 35 / 100;
-                        int tanpa_kulit = Integer.parseInt(berat_penjemuran) * 25 / 100;
+                        int dengan_kulit = Integer.parseInt(berat_penjemuran) - (Integer.parseInt(berat_penjemuran) * 30 / 100);
+                        int tanpa_kulit = Integer.parseInt(berat_penjemuran) - (Integer.parseInt(berat_penjemuran) * 50 / 100);
 
                         targetDKulit.setText(dengan_kulit+"Kg" +" - "+ (dengan_kulit+2)+"Kg");
                         targetTKulit.setText((tanpa_kulit-1)+"Kg" +" - "+ (tanpa_kulit+1)+"Kg");
@@ -576,8 +576,8 @@ public class PengolahanJelek extends AppCompatActivity {
                         slsitxtTanggalAkhir.setText(tanggal_akhir);
                         slsitxtBeratPenjemuran.setText(berat_penjemuran + "Kg");
 
-                        int dengan_kulit = Integer.parseInt(berat_penjemuran) * 35 / 100;
-                        int tanpa_kulit = Integer.parseInt(berat_penjemuran) * 25 / 100;
+                        int dengan_kulit = Integer.parseInt(berat_penjemuran) - (Integer.parseInt(berat_penjemuran) * 30 / 100);
+                        int tanpa_kulit = Integer.parseInt(berat_penjemuran) - (Integer.parseInt(berat_penjemuran) * 50 / 100);
 
                         targetDKulit.setText(dengan_kulit+"Kg" +" - "+ (dengan_kulit+2)+"Kg");
                         targetTKulit.setText((tanpa_kulit-1)+"Kg" +" - "+ (tanpa_kulit+1)+"Kg");
@@ -672,7 +672,7 @@ public class PengolahanJelek extends AppCompatActivity {
                     bundle.putString("id_sorting",id_sorting);
                     bundle.putString("id_panen",id_panen);
                     dialogKonfirmasiProsesJelek.setArguments(bundle);
-                    dialogKonfirmasiProsesJelek.show(fm, "Konfirmasi Proses Jelek");
+                    dialogKonfirmasiProsesJelek.show(fm, "Konfirmasi Proses Standard");
                     DialogSelesaikanFermentasi.dismiss();
                 }
             }

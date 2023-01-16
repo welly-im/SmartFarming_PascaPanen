@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilih ID Panen"
+                android:text="Pilih Tanggal Panen"
                 android:textSize="26dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -43,7 +43,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text="Klik Disini Untuk Pilih \nID Panen"
+                    android:text="Klik Disini Untuk Pilih \nTanggal Panen"
                     android:textColor="@color/white"
                     android:textColorLink="@color/white"
                     android:textColorHighlight="@color/white"
@@ -61,7 +61,7 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="5dp"
                 android:textSize="12sp"
-                android:text="Silahkan pilih ID Panen yang sudah disortir"/>
+                android:text="Silahkan pilih tanggal panen"/>
             <LinearLayout
                 android:layoutDirection="rtl"
                 android:layout_marginTop="25dp"

@@ -36,8 +36,8 @@ public class InformasiCuaca extends AppCompatActivity {
         webView.setWebViewClient(new MyBrowser());
         webView.getSettings().setJavaScriptEnabled(true);
 
-        webView.loadUrl("https://www.timeanddate.com/weather/@8174582/historic?month="+month+"&year="+year+"");
-
+        //webView.loadUrl("https://www.timeanddate.com/weather/@8174582/historic?month="+month+"&year="+year+"");
+        webView.loadUrl("https://www.accuweather.com/id/id/dampit/203265/january-weather/203265");
 
     }
 

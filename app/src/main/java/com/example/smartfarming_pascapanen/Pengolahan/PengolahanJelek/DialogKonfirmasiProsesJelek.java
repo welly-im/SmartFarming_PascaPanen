@@ -120,7 +120,7 @@ public class DialogKonfirmasiProsesJelek extends DialogFragment {
             }
         });
         getDataCuaca();
-        this.getDialog().setTitle("Konfirmasi Proses Jelek");
+        this.getDialog().setTitle("Konfirmasi Proses Standard");
         this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         this.getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         this.getDialog().getWindow().setGravity(Gravity.BOTTOM);

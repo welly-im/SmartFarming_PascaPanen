@@ -140,7 +140,6 @@ public class GudangStok extends AppCompatActivity {
                             i.putExtra("id_pengguna", id_pengguna);
                             i.putExtra("nama_pengguna", nama_pengguna);
                             startActivity(i);
-                            finish();
                         }
                     });
                 } catch (JSONException e) {
@@ -212,7 +211,6 @@ public class GudangStok extends AppCompatActivity {
                 try{
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    //just loop 5 times
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         dataModel3 = new DataModelHistoryPenjualan();

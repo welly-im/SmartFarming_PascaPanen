@@ -219,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Pastikan data kopi yang dimasukkan \nadalah kopi yang sudah digiling!"
+                        android:text="Pastikan data kopi yang dimasukkan \nadalah kopi yang sudah dipisahkan dari kulit(digiling)!"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -273,6 +273,8 @@
                         android:src="@drawable/i_info" />
 
                     <TextView
+                        android:id="@+id/ket_grade"
+                        android:gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"

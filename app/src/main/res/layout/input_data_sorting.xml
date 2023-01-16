@@ -129,7 +129,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DATA KOPI BAGUS"
+                        android:text="DATA KOPI PREMIUM"
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/green"
                         android:textSize="16sp"/>
@@ -160,7 +160,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Berat Sortinggan (KG)"
+                        android:text="Berat Sortingan (KG)"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:fontFamily="sans-serif-black" />
@@ -206,7 +206,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DATA KOPI JELEK"
+                        android:text="DATA KOPI STANDARD"
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/red"
                         android:textSize="16sp"/>
@@ -237,7 +237,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Berat Sortinggan (KG)"
+                        android:text="Berat Sortingan (KG)"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:fontFamily="sans-serif-black" />

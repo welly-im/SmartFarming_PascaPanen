@@ -48,7 +48,7 @@ import java.util.Map;
 public class GudangStokTambahData extends AppCompatActivity {
 
     Button btnSimpan, btnKembali;
-    TextView namaPengguna, InfoIdPenjemuran, InfoBeratAkhir, infoHargaJual, tvKetInfoHargaJual, tvInfoPengolahan;
+    TextView namaPengguna, InfoIdPenjemuran, InfoBeratAkhir, infoHargaJual, tvKetInfoHargaJual, tvInfoPengolahan,tvKetGrade;
     EditText edtIdStok, edtBerat, edtTanggalMasuk;
     AutoCompleteTextView gradeKopi;
     Dialog dialogPopUp, infoPopUp;
@@ -76,6 +76,7 @@ public class GudangStokTambahData extends AppCompatActivity {
         gradeKopi = findViewById(R.id.autoCompleteTextViewGradeKopi);
         tvKetInfoHargaJual = findViewById(R.id.ketnfo_harga_jual);
         tvInfoPengolahan = findViewById(R.id.info_pengolahan);
+        tvKetGrade = findViewById(R.id.ket_grade);
 
         btnKembali = findViewById(R.id.kembali);
         btnSimpan = findViewById(R.id.tambahDataKopi);
@@ -87,7 +88,7 @@ public class GudangStokTambahData extends AppCompatActivity {
         InfoIdPenjemuran.setText(id_penjemuran);
         InfoBeratAkhir.setText(berat_akhir_proses);
 
-        String dateNow = "STOK" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String dateNow = "STK" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         edtIdStok.setText(dateNow);
         edtTanggalMasuk.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
 
@@ -137,15 +138,18 @@ public class GudangStokTambahData extends AppCompatActivity {
                     String[] id_grade = new String[jsonArray.length()];
                     String[] grade = new String[jsonArray.length()];
                     String[] hargaperkg = new String[jsonArray.length()];
+                    String[] ket = new String[jsonArray.length()];
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         id_grade[i] = jsonObject1.getString("id_grade");
                         grade[i] = jsonObject1.getString("grade");
                         hargaperkg[i] = jsonObject1.getString("harga_per_kg");
+                        ket[i] = jsonObject1.getString("keterangan");
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(GudangStokTambahData.this, android.R.layout.simple_list_item_1, grade);
                     ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(GudangStokTambahData.this, android.R.layout.simple_list_item_1, hargaperkg);
                     ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(GudangStokTambahData.this, android.R.layout.simple_list_item_1, id_grade);
+                    ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(GudangStokTambahData.this, android.R.layout.simple_list_item_1, ket);
                     gradeKopi.setAdapter(adapter);
                     gradeKopi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -156,11 +160,13 @@ public class GudangStokTambahData extends AppCompatActivity {
                             id_grade_fix[0] = String.valueOf(Integer.parseInt(idGrade));
                             if (Integer.parseInt(edtBerat.getText().toString()) > 0) {
                                 try {
-                                    edtIdStok.setText(edtIdStok.getText().toString() + grade);
+                                    edtIdStok.setText(dateNow + grade);
                                     int harga = Integer.parseInt(InfoHarga);
                                     int berat = Integer.parseInt(edtBerat.getText().toString());
                                     int total = harga * berat;
-                                    //setText with currency format Rp.
+                                    tvKetGrade.setText("Keterangan grade: " +adapter4.getItem(i));
+                                    tvKetGrade.setTextColor(getColor(R.color.yellow));
+                                    tvKetGrade.setTextSize(14);
                                     infoHargaJual.setText("Rp. " +NumberFormat.getNumberInstance(Locale.US).format(total));
                                     infoHargaJual.setTextSize(18);
                                     tvKetInfoHargaJual.setTextSize(10);
@@ -193,11 +199,12 @@ public class GudangStokTambahData extends AppCompatActivity {
                 String tanggal_masuk = edtTanggalMasuk.getText().toString();
                 String harga_jual = infoHargaJual.getText().toString();
                 String berat_akhir = InfoBeratAkhir.getText().toString();
+                String info_stok = tvKetGrade.getText().toString();
 
                 if (id_stok.isEmpty() || id_penjemuran.isEmpty() || id_grade.isEmpty() || berat.isEmpty() || tanggal_masuk.isEmpty() || harga_jual.isEmpty() || berat_akhir.isEmpty()) {
                     Toast.makeText(GudangStokTambahData.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 } else {
-                    ShowPopup(id_pengguna, nama_pengguna, id_stok, id_penjemuran, id_grade_fix[0], berat, tanggal_masuk);
+                    ShowPopup(id_pengguna, nama_pengguna, id_stok, id_penjemuran, id_grade_fix[0], berat, tanggal_masuk, info_stok);
                 }
             }
         });
@@ -241,7 +248,7 @@ public class GudangStokTambahData extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void ShowPopup( String id_pengguna, String nama_pengguna, String id_stok, String id_penjemuran, String id_grade_fix, String berat, String tanggal_masuk) {
+    private void ShowPopup( String id_pengguna, String nama_pengguna, String id_stok, String id_penjemuran, String id_grade_fix, String berat, String tanggal_masuk, String info_stok) {
         Button batal, simpanData;
         dialogPopUp.setContentView(R.layout.component_dialog);
         batal = dialogPopUp.findViewById(R.id.batal);

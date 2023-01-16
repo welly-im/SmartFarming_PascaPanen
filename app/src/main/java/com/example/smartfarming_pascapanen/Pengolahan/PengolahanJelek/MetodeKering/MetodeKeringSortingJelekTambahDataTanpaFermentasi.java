@@ -68,13 +68,13 @@ public class MetodeKeringSortingJelekTambahDataTanpaFermentasi extends AppCompat
         infoPopUp = new Dialog(this);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 25);
+        calendar.add(Calendar.DAY_OF_YEAR, 15);
         Date tanggal = calendar.getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String tanggal25Selanjutnya = dateFormat.format(tanggal);
 
 
-        String GenIdPenjemuran = "PENTF" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "SJE";;
+        String GenIdPenjemuran = "PEN" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "STD";;
         String dateNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         IdPenjemuran.setText(GenIdPenjemuran);
@@ -83,8 +83,8 @@ public class MetodeKeringSortingJelekTambahDataTanpaFermentasi extends AppCompat
         tglAwalProses.setText(dateNow);
         tglAkhirProses.setText(tanggal25Selanjutnya);
 
-        int dengan_kulit = Integer.parseInt(berat_sorting) * 35 / 100;
-        int tanpa_kulit = Integer.parseInt(berat_sorting) * 25 / 100;
+        int dengan_kulit = Integer.parseInt(berat_sorting) - (Integer.parseInt(berat_sorting) * 30 / 100);
+        int tanpa_kulit = Integer.parseInt(berat_sorting) - (Integer.parseInt(berat_sorting) * 50 / 100);
 
         target_dKulit.setText(dengan_kulit+"Kg" +" - "+ (dengan_kulit+2)+"Kg");
         target_tKulit.setText((tanpa_kulit-1)+"Kg" +" - "+ (tanpa_kulit+1)+"Kg");
@@ -159,7 +159,7 @@ public class MetodeKeringSortingJelekTambahDataTanpaFermentasi extends AppCompat
             @Override
             public void onClick(View view) {
                 final  Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_YEAR, 25);
+                calendar.add(Calendar.DAY_OF_YEAR, 15);
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);

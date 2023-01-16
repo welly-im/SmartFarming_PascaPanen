@@ -196,12 +196,36 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    tvBeratPanen.setText(jsonObject.getString("total_berat"));
-                    tvBeratSortingBagus.setText(jsonObject.getString("total_sorting_bagus"));
-                    tvBeratSortingJelek.setText(jsonObject.getString("total_sorting_jelek"));
-                    tvBeratFermentasi.setText(jsonObject.getString("total_berat_fermentasi"));
-                    tvBeratPenjemuran.setText(jsonObject.getString("total_berat_penjemuran"));
-                    tvBeratStokKopi.setText(jsonObject.getString("total_berat_stok"));
+                    if(jsonObject.getString("total_berat").equals("null")){
+                        tvBeratPanen.setText("0");
+                    } else {
+                        tvBeratPanen.setText(jsonObject.getString("total_berat"));
+                    }
+                    if(jsonObject.getString("total_sorting_bagus").equals("null")){
+                        tvBeratSortingBagus.setText("0");
+                    } else {
+                        tvBeratSortingBagus.setText(jsonObject.getString("total_sorting_bagus"));
+                    }
+                    if(jsonObject.getString("total_sorting_jelek").equals("null")){
+                        tvBeratSortingJelek.setText("0");
+                    } else {
+                        tvBeratSortingJelek.setText(jsonObject.getString("total_sorting_jelek"));
+                    }
+                    if (jsonObject.getString("total_berat_fermentasi").equals("null")){
+                        tvBeratFermentasi.setText("0");
+                    } else {
+                        tvBeratFermentasi.setText(jsonObject.getString("total_berat_fermentasi"));
+                    }
+                    if (jsonObject.getString("total_berat_penjemuran").equals("null")){
+                        tvBeratPenjemuran.setText("0");
+                    } else {
+                        tvBeratPenjemuran.setText(jsonObject.getString("total_berat_penjemuran"));
+                    }
+                    if (jsonObject.getString("total_berat_stok").equals("null")){
+                        tvBeratStokKopi.setText("0");
+                    } else {
+                        tvBeratStokKopi.setText(jsonObject.getString("total_berat_stok"));
+                    }
                     tvBeratGradeA.setText(jsonObject.getString("total_berat_kopi_tanpa_kulit_grade_1"));
                     tvBeratGradeB.setText(jsonObject.getString("total_berat_kopi_tanpa_kulit_grade_2"));
                     tvBeratGradeC.setText(jsonObject.getString("total_berat_kopi_tanpa_kulit_grade_3"));

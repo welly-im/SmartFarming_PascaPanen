@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center_horizontal"
-                android:text="MENU PENGOLAHAN \nKopi Jelek"
+                android:text="MENU PENGOLAHAN \nKopi Standard"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
             <ScrollView

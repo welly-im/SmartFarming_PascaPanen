@@ -69,8 +69,8 @@ public class InputDataSorting extends AppCompatActivity {
 
         txtIDPanen.setText(id_panen);
         txtNamaPengguna.setText(nama_pengguna);
-        edtIDSortingBagus.setText("SBA"+IDdate);
-        edtIDSortingJelek.setText("SJE"+IDdate);
+        edtIDSortingBagus.setText("PRM"+IDdate);
+        edtIDSortingJelek.setText("STD"+IDdate);
         edtTanggalSorting.setText(date);
 
         getInfoIDPanen(id_panen);
@@ -101,7 +101,7 @@ public class InputDataSorting extends AppCompatActivity {
                 if(Integer.parseInt(berat_sorting_bagus) + Integer.parseInt(berat_sorting_jelek) == Integer.parseInt(txtBeratPanen.getText().toString())){
                     inputDataSorting(v, id_panen, id_sorting_bagus, berat_sorting_bagus, tanggal_sorting, id_sorting_jelek, berat_sorting_jelek, id_pengguna_input, nama_pengguna_input);
                 } else {
-                    String pesan = "Berat Sorting Bagus dan Jelek Tidak Sesuai Dengan Berat Panen!";
+                    String pesan = "Berat Sorting Premium dan Standard Tidak Sesuai Dengan Berat Panen!";
                     AlertPopup(v, pesan);
                 }
             }

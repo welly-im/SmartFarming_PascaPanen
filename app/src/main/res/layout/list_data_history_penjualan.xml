@@ -171,11 +171,11 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:text="A"
-                android:layout_marginRight="35dp"
+                android:layout_marginRight="28dp"
                 android:layout_marginBottom="5dp"
                 android:textAlignment="center"
                 android:textColor="@color/yellow"
-                android:textSize="50sp"
+                android:textSize="46sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

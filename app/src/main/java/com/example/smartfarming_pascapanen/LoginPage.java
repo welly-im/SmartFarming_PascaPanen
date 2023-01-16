@@ -80,10 +80,17 @@ public class LoginPage extends AppCompatActivity {
                                 startActivity(i);
                                 finish();
                             }else if(status.equals("1") && jabatan.equals("2")){
-                                cardInfoLogin.setCardBackgroundColor(getResources().getColor(R.color.grey));
-                                infoLogin.setText("Anda Tidak Boleh Masuk!");
-                                infoLogin.setTextSize(14);
-                                masuk.setText("Masuk");
+                                masuk.setText("Pengelola masuk");
+                                Intent i = new Intent(LoginPage.this, MainActivity.class);
+                                i.putExtra("id_pengguna", id_pengguna);
+                                i.putExtra("nama_pengguna", nama_pengguna);
+                                startActivity(i);
+                                finish();
+
+//                                cardInfoLogin.setCardBackgroundColor(getResources().getColor(R.color.grey));
+//                                infoLogin.setText("Anda Tidak Boleh Masuk!");
+//                                infoLogin.setTextSize(14);
+//                                masuk.setText("Masuk");
                             }else{
                                 infoLogin.setText(message);
                                 infoLogin.setTextSize(14);

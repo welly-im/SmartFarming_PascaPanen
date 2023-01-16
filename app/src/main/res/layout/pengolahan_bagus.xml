@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center_horizontal"
-                android:text="MENU PENGOLAHAN \nKopi Bagus"
+                android:text="MENU PENGOLAHAN \nKopi Premium"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
             <ScrollView

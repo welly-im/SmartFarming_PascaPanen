@@ -87,9 +87,9 @@ public class MetodeBasahSortingJelekTambahData extends AppCompatActivity {
         infoPopUp = new Dialog(this);
         infoLanjutPopUp = new Dialog(this);
 
-        String GenIdFermentasi = "F" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) +"SJE";
+        String GenIdFermentasi = "F" + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) +"STD";
         String dateNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        String OneDayLater = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24)));
+        String OneDayLater = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(System.currentTimeMillis() + (3000 * 60 * 60 * 24)));
 
         IdFermentasi.setText(GenIdFermentasi);
         txtIDSorting.setText(id_sorting);

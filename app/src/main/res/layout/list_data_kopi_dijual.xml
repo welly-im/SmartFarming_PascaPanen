@@ -162,7 +162,6 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Keterangan kopi"
-                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="11sp" />
             </LinearLayout>

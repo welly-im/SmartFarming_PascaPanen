@@ -46,9 +46,9 @@
                 android:backgroundTint="@color/green_old"
                 android:fontFamily="sans-serif-black"
                 android:paddingHorizontal="35dp"
-                android:paddingVertical="5dp"
+                android:paddingVertical="15dp"
                 android:layout_marginTop="35dp"
-                android:text="Sorting \nBagus"
+                android:text="Sorting Premium"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
@@ -59,9 +59,9 @@
                 android:backgroundTint="@color/red_old"
                 android:fontFamily="sans-serif-black"
                 android:paddingHorizontal="35dp"
-                android:paddingVertical="5dp"
+                android:paddingVertical="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Sorting \nJelek"
+                android:text="Sorting Standard"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
